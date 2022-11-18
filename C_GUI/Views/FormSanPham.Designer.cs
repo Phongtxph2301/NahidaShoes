@@ -29,9 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this._lblTheLoaiTang2 = new System.Windows.Forms.Label();
+            this.cmb_theloai1 = new C_GUI.RJControls.RJComboBox();
+            this.cmb_thelaoitang2 = new C_GUI.RJControls.RJComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this._lblTheloaiTang1 = new System.Windows.Forms.Label();
+            this._rjbtnAddtobill = new C_GUI.RJControls.RJButton();
+            this._rjbtnRemove = new C_GUI.RJControls.RJButton();
+            this._rjbtnEdit = new C_GUI.RJControls.RJButton();
+            this._rjbtnAdd = new C_GUI.RJControls.RJButton();
             this.label9 = new System.Windows.Forms.Label();
             this._rtbxMota = new System.Windows.Forms.RichTextBox();
             this._rjtbxSoLuongTon = new C_GUI.RJControls.RJTextBox();
@@ -54,10 +59,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this._rjtbxTimKiem = new C_GUI.RJControls.RJTextBox();
             this._dgrvThongTinSanPham = new System.Windows.Forms.DataGridView();
-            this._rjbtnAdd = new C_GUI.RJControls.RJButton();
-            this._rjbtnEdit = new C_GUI.RJControls.RJButton();
-            this._rjbtnRemove = new C_GUI.RJControls.RJButton();
-            this._rjbtnAddtobill = new C_GUI.RJControls.RJButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dgrvThongTinSanPham)).BeginInit();
@@ -65,13 +66,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmb_theloai1);
+            this.groupBox1.Controls.Add(this.cmb_thelaoitang2);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this._rjbtnAddtobill);
             this.groupBox1.Controls.Add(this._rjbtnRemove);
             this.groupBox1.Controls.Add(this._rjbtnEdit);
             this.groupBox1.Controls.Add(this._rjbtnAdd);
-            this.groupBox1.Controls.Add(this._lblTheLoaiTang2);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this._lblTheloaiTang1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this._rtbxMota);
             this.groupBox1.Controls.Add(this._rjtbxSoLuongTon);
@@ -92,46 +94,150 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(608, 662);
+            this.groupBox1.Size = new System.Drawing.Size(608, 735);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin Chi TIết";
             // 
-            // _lblTheLoaiTang2
+            // cmb_theloai1
             // 
-            this._lblTheLoaiTang2.AutoSize = true;
-            this._lblTheLoaiTang2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._lblTheLoaiTang2.Location = new System.Drawing.Point(102, 23);
-            this._lblTheLoaiTang2.Name = "_lblTheLoaiTang2";
-            this._lblTheLoaiTang2.Size = new System.Drawing.Size(57, 23);
-            this._lblTheLoaiTang2.TabIndex = 20;
-            this._lblTheLoaiTang2.Text = "Tầng2";
+            this.cmb_theloai1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmb_theloai1.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.cmb_theloai1.BorderSize = 1;
+            this.cmb_theloai1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmb_theloai1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cmb_theloai1.ForeColor = System.Drawing.Color.DimGray;
+            this.cmb_theloai1.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmb_theloai1.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this.cmb_theloai1.ListTextColor = System.Drawing.Color.DimGray;
+            this.cmb_theloai1.Location = new System.Drawing.Point(169, 255);
+            this.cmb_theloai1.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cmb_theloai1.Name = "cmb_theloai1";
+            this.cmb_theloai1.Padding = new System.Windows.Forms.Padding(1);
+            this.cmb_theloai1.Size = new System.Drawing.Size(215, 33);
+            this.cmb_theloai1.TabIndex = 28;
+            this.cmb_theloai1.Texts = "";
+            // 
+            // cmb_thelaoitang2
+            // 
+            this.cmb_thelaoitang2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmb_thelaoitang2.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.cmb_thelaoitang2.BorderSize = 1;
+            this.cmb_thelaoitang2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmb_thelaoitang2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cmb_thelaoitang2.ForeColor = System.Drawing.Color.DimGray;
+            this.cmb_thelaoitang2.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmb_thelaoitang2.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this.cmb_thelaoitang2.ListTextColor = System.Drawing.Color.DimGray;
+            this.cmb_thelaoitang2.Location = new System.Drawing.Point(169, 200);
+            this.cmb_thelaoitang2.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cmb_thelaoitang2.Name = "cmb_thelaoitang2";
+            this.cmb_thelaoitang2.Padding = new System.Windows.Forms.Padding(1);
+            this.cmb_thelaoitang2.Size = new System.Drawing.Size(215, 33);
+            this.cmb_thelaoitang2.TabIndex = 27;
+            this.cmb_thelaoitang2.Texts = "";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(6, 259);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(137, 23);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Chi Tiết Thể Loại";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(73, 23);
+            this.label10.Location = new System.Drawing.Point(6, 203);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(22, 23);
-            this.label10.TabIndex = 19;
-            this.label10.Text = ">";
+            this.label10.Size = new System.Drawing.Size(74, 23);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Thể Loại";
             // 
-            // _lblTheloaiTang1
+            // _rjbtnAddtobill
             // 
-            this._lblTheloaiTang1.AutoSize = true;
-            this._lblTheloaiTang1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._lblTheloaiTang1.Location = new System.Drawing.Point(10, 23);
-            this._lblTheloaiTang1.Name = "_lblTheloaiTang1";
-            this._lblTheloaiTang1.Size = new System.Drawing.Size(57, 23);
-            this._lblTheloaiTang1.TabIndex = 18;
-            this._lblTheloaiTang1.Text = "Tầng1";
+            this._rjbtnAddtobill.BackColor = System.Drawing.Color.Turquoise;
+            this._rjbtnAddtobill.BackgroundColor = System.Drawing.Color.Turquoise;
+            this._rjbtnAddtobill.BorderColor = System.Drawing.Color.Black;
+            this._rjbtnAddtobill.BorderRadius = 15;
+            this._rjbtnAddtobill.BorderSize = 2;
+            this._rjbtnAddtobill.FlatAppearance.BorderSize = 0;
+            this._rjbtnAddtobill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._rjbtnAddtobill.ForeColor = System.Drawing.Color.Black;
+            this._rjbtnAddtobill.Location = new System.Drawing.Point(429, 584);
+            this._rjbtnAddtobill.Name = "_rjbtnAddtobill";
+            this._rjbtnAddtobill.Size = new System.Drawing.Size(173, 39);
+            this._rjbtnAddtobill.SizeImage = new System.Drawing.Size(20, 20);
+            this._rjbtnAddtobill.TabIndex = 24;
+            this._rjbtnAddtobill.Text = "Add to bill";
+            this._rjbtnAddtobill.TextColor = System.Drawing.Color.Black;
+            this._rjbtnAddtobill.UseVisualStyleBackColor = false;
+            // 
+            // _rjbtnRemove
+            // 
+            this._rjbtnRemove.BackColor = System.Drawing.Color.Turquoise;
+            this._rjbtnRemove.BackgroundColor = System.Drawing.Color.Turquoise;
+            this._rjbtnRemove.BorderColor = System.Drawing.Color.Black;
+            this._rjbtnRemove.BorderRadius = 15;
+            this._rjbtnRemove.BorderSize = 2;
+            this._rjbtnRemove.FlatAppearance.BorderSize = 0;
+            this._rjbtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._rjbtnRemove.ForeColor = System.Drawing.Color.Black;
+            this._rjbtnRemove.Location = new System.Drawing.Point(429, 529);
+            this._rjbtnRemove.Name = "_rjbtnRemove";
+            this._rjbtnRemove.Size = new System.Drawing.Size(173, 39);
+            this._rjbtnRemove.SizeImage = new System.Drawing.Size(20, 20);
+            this._rjbtnRemove.TabIndex = 23;
+            this._rjbtnRemove.Text = "Remove";
+            this._rjbtnRemove.TextColor = System.Drawing.Color.Black;
+            this._rjbtnRemove.UseVisualStyleBackColor = false;
+            // 
+            // _rjbtnEdit
+            // 
+            this._rjbtnEdit.BackColor = System.Drawing.Color.Turquoise;
+            this._rjbtnEdit.BackgroundColor = System.Drawing.Color.Turquoise;
+            this._rjbtnEdit.BorderColor = System.Drawing.Color.Black;
+            this._rjbtnEdit.BorderRadius = 15;
+            this._rjbtnEdit.BorderSize = 2;
+            this._rjbtnEdit.FlatAppearance.BorderSize = 0;
+            this._rjbtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._rjbtnEdit.ForeColor = System.Drawing.Color.Black;
+            this._rjbtnEdit.Location = new System.Drawing.Point(429, 469);
+            this._rjbtnEdit.Name = "_rjbtnEdit";
+            this._rjbtnEdit.Size = new System.Drawing.Size(173, 39);
+            this._rjbtnEdit.SizeImage = new System.Drawing.Size(20, 20);
+            this._rjbtnEdit.TabIndex = 22;
+            this._rjbtnEdit.Text = "Edit";
+            this._rjbtnEdit.TextColor = System.Drawing.Color.Black;
+            this._rjbtnEdit.UseVisualStyleBackColor = false;
+            // 
+            // _rjbtnAdd
+            // 
+            this._rjbtnAdd.BackColor = System.Drawing.Color.Turquoise;
+            this._rjbtnAdd.BackgroundColor = System.Drawing.Color.Turquoise;
+            this._rjbtnAdd.BorderColor = System.Drawing.Color.Black;
+            this._rjbtnAdd.BorderRadius = 15;
+            this._rjbtnAdd.BorderSize = 2;
+            this._rjbtnAdd.FlatAppearance.BorderSize = 0;
+            this._rjbtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._rjbtnAdd.ForeColor = System.Drawing.Color.Black;
+            this._rjbtnAdd.Location = new System.Drawing.Point(429, 417);
+            this._rjbtnAdd.Name = "_rjbtnAdd";
+            this._rjbtnAdd.Size = new System.Drawing.Size(173, 39);
+            this._rjbtnAdd.SizeImage = new System.Drawing.Size(20, 20);
+            this._rjbtnAdd.TabIndex = 21;
+            this._rjbtnAdd.Text = "Add";
+            this._rjbtnAdd.TextColor = System.Drawing.Color.Black;
+            this._rjbtnAdd.UseVisualStyleBackColor = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(0, 536);
+            this.label9.Location = new System.Drawing.Point(6, 595);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 23);
             this.label9.TabIndex = 17;
@@ -139,7 +245,7 @@
             // 
             // _rtbxMota
             // 
-            this._rtbxMota.Location = new System.Drawing.Point(178, 536);
+            this._rtbxMota.Location = new System.Drawing.Point(169, 591);
             this._rtbxMota.Name = "_rtbxMota";
             this._rtbxMota.Size = new System.Drawing.Size(215, 120);
             this._rtbxMota.TabIndex = 16;
@@ -154,7 +260,7 @@
             this._rjtbxSoLuongTon.BorderSize = 2;
             this._rjtbxSoLuongTon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._rjtbxSoLuongTon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this._rjtbxSoLuongTon.Location = new System.Drawing.Point(178, 417);
+            this._rjtbxSoLuongTon.Location = new System.Drawing.Point(169, 479);
             this._rjtbxSoLuongTon.Margin = new System.Windows.Forms.Padding(4);
             this._rjtbxSoLuongTon.MaxLength = 20;
             this._rjtbxSoLuongTon.Multiline = false;
@@ -177,7 +283,7 @@
             this._rjtbxGiaBan.BorderSize = 2;
             this._rjtbxGiaBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._rjtbxGiaBan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this._rjtbxGiaBan.Location = new System.Drawing.Point(178, 365);
+            this._rjtbxGiaBan.Location = new System.Drawing.Point(169, 422);
             this._rjtbxGiaBan.Margin = new System.Windows.Forms.Padding(4);
             this._rjtbxGiaBan.MaxLength = 20;
             this._rjtbxGiaBan.Multiline = false;
@@ -200,7 +306,7 @@
             this._rjtbxGiaNhap.BorderSize = 2;
             this._rjtbxGiaNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._rjtbxGiaNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this._rjtbxGiaNhap.Location = new System.Drawing.Point(178, 313);
+            this._rjtbxGiaNhap.Location = new System.Drawing.Point(169, 365);
             this._rjtbxGiaNhap.Margin = new System.Windows.Forms.Padding(4);
             this._rjtbxGiaNhap.MaxLength = 20;
             this._rjtbxGiaNhap.Multiline = false;
@@ -225,7 +331,7 @@
             this._rjcmbCCDeGiay.IconColor = System.Drawing.Color.MediumSlateBlue;
             this._rjcmbCCDeGiay.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this._rjcmbCCDeGiay.ListTextColor = System.Drawing.Color.DimGray;
-            this._rjcmbCCDeGiay.Location = new System.Drawing.Point(178, 261);
+            this._rjcmbCCDeGiay.Location = new System.Drawing.Point(169, 310);
             this._rjcmbCCDeGiay.MinimumSize = new System.Drawing.Size(200, 30);
             this._rjcmbCCDeGiay.Name = "_rjcmbCCDeGiay";
             this._rjcmbCCDeGiay.Padding = new System.Windows.Forms.Padding(1);
@@ -244,7 +350,7 @@
             this._rjcmbHangGiay.IconColor = System.Drawing.Color.MediumSlateBlue;
             this._rjcmbHangGiay.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this._rjcmbHangGiay.ListTextColor = System.Drawing.Color.DimGray;
-            this._rjcmbHangGiay.Location = new System.Drawing.Point(178, 209);
+            this._rjcmbHangGiay.Location = new System.Drawing.Point(169, 145);
             this._rjcmbHangGiay.MinimumSize = new System.Drawing.Size(200, 30);
             this._rjcmbHangGiay.Name = "_rjcmbHangGiay";
             this._rjcmbHangGiay.Padding = new System.Windows.Forms.Padding(1);
@@ -263,7 +369,7 @@
             this._rjcmbSize.IconColor = System.Drawing.Color.MediumSlateBlue;
             this._rjcmbSize.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this._rjcmbSize.ListTextColor = System.Drawing.Color.DimGray;
-            this._rjcmbSize.Location = new System.Drawing.Point(178, 157);
+            this._rjcmbSize.Location = new System.Drawing.Point(169, 90);
             this._rjcmbSize.MinimumSize = new System.Drawing.Size(200, 30);
             this._rjcmbSize.Name = "_rjcmbSize";
             this._rjcmbSize.Padding = new System.Windows.Forms.Padding(1);
@@ -282,7 +388,7 @@
             this._rjcmbNSX.IconColor = System.Drawing.Color.MediumSlateBlue;
             this._rjcmbNSX.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this._rjcmbNSX.ListTextColor = System.Drawing.Color.DimGray;
-            this._rjcmbNSX.Location = new System.Drawing.Point(178, 105);
+            this._rjcmbNSX.Location = new System.Drawing.Point(169, 35);
             this._rjcmbNSX.MinimumSize = new System.Drawing.Size(200, 30);
             this._rjcmbNSX.Name = "_rjcmbNSX";
             this._rjcmbNSX.Padding = new System.Windows.Forms.Padding(1);
@@ -301,7 +407,7 @@
             this._rjcmbTenGiay.IconColor = System.Drawing.Color.MediumSlateBlue;
             this._rjcmbTenGiay.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
             this._rjcmbTenGiay.ListTextColor = System.Drawing.Color.DimGray;
-            this._rjcmbTenGiay.Location = new System.Drawing.Point(178, 469);
+            this._rjcmbTenGiay.Location = new System.Drawing.Point(169, 536);
             this._rjcmbTenGiay.MinimumSize = new System.Drawing.Size(200, 30);
             this._rjcmbTenGiay.Name = "_rjcmbTenGiay";
             this._rjcmbTenGiay.Padding = new System.Windows.Forms.Padding(1);
@@ -313,7 +419,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(6, 313);
+            this.label8.Location = new System.Drawing.Point(6, 371);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(82, 23);
             this.label8.TabIndex = 7;
@@ -323,7 +429,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(6, 417);
+            this.label7.Location = new System.Drawing.Point(6, 483);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(116, 23);
             this.label7.TabIndex = 6;
@@ -333,7 +439,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(6, 365);
+            this.label6.Location = new System.Drawing.Point(6, 427);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 23);
             this.label6.TabIndex = 5;
@@ -343,7 +449,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(6, 261);
+            this.label5.Location = new System.Drawing.Point(6, 315);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(153, 23);
             this.label5.TabIndex = 4;
@@ -353,7 +459,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(6, 209);
+            this.label4.Location = new System.Drawing.Point(6, 147);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 23);
             this.label4.TabIndex = 3;
@@ -363,7 +469,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(6, 157);
+            this.label3.Location = new System.Drawing.Point(6, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 23);
             this.label3.TabIndex = 2;
@@ -373,7 +479,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(6, 105);
+            this.label2.Location = new System.Drawing.Point(6, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 23);
             this.label2.TabIndex = 1;
@@ -383,7 +489,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(6, 469);
+            this.label1.Location = new System.Drawing.Point(6, 539);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 23);
             this.label1.TabIndex = 0;
@@ -445,87 +551,11 @@
             this._dgrvThongTinSanPham.Size = new System.Drawing.Size(558, 568);
             this._dgrvThongTinSanPham.TabIndex = 0;
             // 
-            // _rjbtnAdd
-            // 
-            this._rjbtnAdd.BackColor = System.Drawing.Color.Turquoise;
-            this._rjbtnAdd.BackgroundColor = System.Drawing.Color.Turquoise;
-            this._rjbtnAdd.BorderColor = System.Drawing.Color.Black;
-            this._rjbtnAdd.BorderRadius = 15;
-            this._rjbtnAdd.BorderSize = 2;
-            this._rjbtnAdd.FlatAppearance.BorderSize = 0;
-            this._rjbtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this._rjbtnAdd.ForeColor = System.Drawing.Color.Black;
-            this._rjbtnAdd.Location = new System.Drawing.Point(429, 417);
-            this._rjbtnAdd.Name = "_rjbtnAdd";
-            this._rjbtnAdd.Size = new System.Drawing.Size(173, 39);
-            this._rjbtnAdd.SizeImage = new System.Drawing.Size(20, 20);
-            this._rjbtnAdd.TabIndex = 21;
-            this._rjbtnAdd.Text = "Add";
-            this._rjbtnAdd.TextColor = System.Drawing.Color.Black;
-            this._rjbtnAdd.UseVisualStyleBackColor = false;
-            // 
-            // _rjbtnEdit
-            // 
-            this._rjbtnEdit.BackColor = System.Drawing.Color.Turquoise;
-            this._rjbtnEdit.BackgroundColor = System.Drawing.Color.Turquoise;
-            this._rjbtnEdit.BorderColor = System.Drawing.Color.Black;
-            this._rjbtnEdit.BorderRadius = 15;
-            this._rjbtnEdit.BorderSize = 2;
-            this._rjbtnEdit.FlatAppearance.BorderSize = 0;
-            this._rjbtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this._rjbtnEdit.ForeColor = System.Drawing.Color.Black;
-            this._rjbtnEdit.Location = new System.Drawing.Point(429, 469);
-            this._rjbtnEdit.Name = "_rjbtnEdit";
-            this._rjbtnEdit.Size = new System.Drawing.Size(173, 39);
-            this._rjbtnEdit.SizeImage = new System.Drawing.Size(20, 20);
-            this._rjbtnEdit.TabIndex = 22;
-            this._rjbtnEdit.Text = "Edit";
-            this._rjbtnEdit.TextColor = System.Drawing.Color.Black;
-            this._rjbtnEdit.UseVisualStyleBackColor = false;
-            // 
-            // _rjbtnRemove
-            // 
-            this._rjbtnRemove.BackColor = System.Drawing.Color.Turquoise;
-            this._rjbtnRemove.BackgroundColor = System.Drawing.Color.Turquoise;
-            this._rjbtnRemove.BorderColor = System.Drawing.Color.Black;
-            this._rjbtnRemove.BorderRadius = 15;
-            this._rjbtnRemove.BorderSize = 2;
-            this._rjbtnRemove.FlatAppearance.BorderSize = 0;
-            this._rjbtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this._rjbtnRemove.ForeColor = System.Drawing.Color.Black;
-            this._rjbtnRemove.Location = new System.Drawing.Point(429, 529);
-            this._rjbtnRemove.Name = "_rjbtnRemove";
-            this._rjbtnRemove.Size = new System.Drawing.Size(173, 39);
-            this._rjbtnRemove.SizeImage = new System.Drawing.Size(20, 20);
-            this._rjbtnRemove.TabIndex = 23;
-            this._rjbtnRemove.Text = "Remove";
-            this._rjbtnRemove.TextColor = System.Drawing.Color.Black;
-            this._rjbtnRemove.UseVisualStyleBackColor = false;
-            // 
-            // _rjbtnAddtobill
-            // 
-            this._rjbtnAddtobill.BackColor = System.Drawing.Color.Turquoise;
-            this._rjbtnAddtobill.BackgroundColor = System.Drawing.Color.Turquoise;
-            this._rjbtnAddtobill.BorderColor = System.Drawing.Color.Black;
-            this._rjbtnAddtobill.BorderRadius = 15;
-            this._rjbtnAddtobill.BorderSize = 2;
-            this._rjbtnAddtobill.FlatAppearance.BorderSize = 0;
-            this._rjbtnAddtobill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this._rjbtnAddtobill.ForeColor = System.Drawing.Color.Black;
-            this._rjbtnAddtobill.Location = new System.Drawing.Point(429, 584);
-            this._rjbtnAddtobill.Name = "_rjbtnAddtobill";
-            this._rjbtnAddtobill.Size = new System.Drawing.Size(173, 39);
-            this._rjbtnAddtobill.SizeImage = new System.Drawing.Size(20, 20);
-            this._rjbtnAddtobill.TabIndex = 24;
-            this._rjbtnAddtobill.Text = "Add to bill";
-            this._rjbtnAddtobill.TextColor = System.Drawing.Color.Black;
-            this._rjbtnAddtobill.UseVisualStyleBackColor = false;
-            // 
             // FormSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1336, 750);
+            this.ClientSize = new System.Drawing.Size(1336, 818);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -543,9 +573,6 @@
         #endregion
 
         private GroupBox groupBox1;
-        private Label _lblTheLoaiTang2;
-        private Label label10;
-        private Label _lblTheloaiTang1;
         private Label label9;
         private RichTextBox _rtbxMota;
         private RJControls.RJTextBox _rjtbxSoLuongTon;
@@ -572,5 +599,9 @@
         private RJControls.RJButton _rjbtnRemove;
         private RJControls.RJButton _rjbtnEdit;
         private RJControls.RJButton _rjbtnAdd;
+        private RJControls.RJComboBox cmb_theloai1;
+        private RJControls.RJComboBox cmb_thelaoitang2;
+        private Label label12;
+        private Label label10;
     }
 }

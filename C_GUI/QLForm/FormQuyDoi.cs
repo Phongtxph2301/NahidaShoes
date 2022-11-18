@@ -1,14 +1,4 @@
 ﻿using A_DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using B_BUS.IServices;
 using B_BUS.Services;
 
@@ -17,7 +7,7 @@ namespace C_GUI.QLForm
     public partial class FormQuyDoi : Form
     {
         public IQLQuyDoi _IqlQuyDoi;
-        Guid _ID;
+        private Guid _ID;
         public FormQuyDoi()
         {
             _IqlQuyDoi = new QLQuyDoi();
@@ -35,7 +25,7 @@ namespace C_GUI.QLForm
             dgrid_show.Columns[4].Name = "trang thai";
             dgrid_show.Rows.Clear();
             dgrid_show.Columns[1].Visible = true;
-            foreach (var a in _IqlQuyDoi.GetAll())
+            foreach (QuyDoi a in _IqlQuyDoi.GetAll())
             {
                 _ = dgrid_show.Rows.Add(stt++, a.Id, a.MaQuyDoi, a.TiLeQuyDoi, a.TrangThai == 1 ? "hoat dong" : "khong hoat dong");
             }
@@ -75,7 +65,7 @@ namespace C_GUI.QLForm
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            _IqlQuyDoi.Add(GetvaluaContro());
+            _ = _IqlQuyDoi.Add(GetvaluaContro());
             LoadData();
         }
 

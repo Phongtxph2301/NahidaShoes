@@ -75,42 +75,42 @@ namespace C_GUI.QLForm
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-//<<<<<<< HEAD
+            //<<<<<<< HEAD
             CuaHang a = GetvaluaContro();
             a.Id = _ID;
             _ = _IQlCuaHang.Update(a);
             LoadData();
-//=======
-            bool thongBao = _IQlCuaHang.Update(new A_DAL.Entities.CuaHang() { Id = _ID,MaCuaHang = txt_ma.Texts,TenCuaHang = txt_ten.Texts,DiaChi = txt_diachi.Texts , TrangThai = (rbtn_hoatdong.Checked == true ? 1 : 0) });
+            //=======
+            bool thongBao = _IQlCuaHang.Update(new A_DAL.Entities.CuaHang() { Id = _ID, MaCuaHang = txt_ma.Texts, TenCuaHang = txt_ten.Texts, DiaChi = txt_diachi.Texts, TrangThai = rbtn_hoatdong.Checked == true ? 1 : 0 });
             if (thongBao)
             {
                 _ = MessageBox.Show("Sửa thành công");
                 LoadData();
             }
-//>>>>>>> parent of 5be5ccb (Thieu)
+            //>>>>>>> parent of 5be5ccb (Thieu)
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-//<<<<<<< HEAD
+            //<<<<<<< HEAD
             CuaHang a = GetvaluaContro();
             a.Id = _ID;
             _ = _IQlCuaHang.Update(a);
             LoadData();
-//=======
-            
-                bool thongBao = _IQlCuaHang.Delete(_IQlCuaHang.GetAll().Find(c => c.Id == _ID));
-                if (thongBao)
-                {
-                    _ = MessageBox.Show("Xóa thành công");
-                    LoadData();
-                }
+            //=======
+
+            bool thongBao = _IQlCuaHang.Delete(_IQlCuaHang.GetAll().Find(c => c.Id == _ID));
+            if (thongBao)
+            {
+                _ = MessageBox.Show("Xóa thành công");
+                LoadData();
+            }
         }
 
         private void dgrid_show_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-//>>>>>>> parent of 5be5ccb (Thieu)
+
+            //>>>>>>> parent of 5be5ccb (Thieu)
         }
     }
 }

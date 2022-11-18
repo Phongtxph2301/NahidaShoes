@@ -86,7 +86,7 @@
 
         private void TrangChu_Load(object sender, EventArgs e)
         {
-            this.Refresh();
+            Refresh();
         }
 
         private void _btnSanPham_Click_1(object sender, EventArgs e)

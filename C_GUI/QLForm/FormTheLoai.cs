@@ -63,7 +63,7 @@ namespace C_GUI.QLForm
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            bool thongBao = _QlTheLoai.Update(new A_DAL.Entities.TheLoai() { Id = _ID, MaTheLoai = txt_ma.Texts, TenTheLoai = txt_ten.Texts, TrangThai = (rbtn_hoatdong.Checked == true ? 1 : 0) });
+            bool thongBao = _QlTheLoai.Update(new A_DAL.Entities.TheLoai() { Id = _ID, MaTheLoai = txt_ma.Texts, TenTheLoai = txt_ten.Texts, TrangThai = rbtn_hoatdong.Checked == true ? 1 : 0 });
             if (thongBao)
             {
                 _ = MessageBox.Show("Sửa thành công");

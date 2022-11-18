@@ -39,6 +39,11 @@ namespace B_BUS.Services
             return igChTiet.Delete(obj);
         }
 
+        public List<ChiTietThanhToan> GetAll()
+        {
+            return igChTiet.GetAll();
+        }
+
         public List<ChiTietThanhToanView> GetAllView()
         {
             // getall

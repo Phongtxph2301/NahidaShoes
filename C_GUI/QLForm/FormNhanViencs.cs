@@ -1,17 +1,7 @@
 ﻿using A_DAL.Entities;
-using B_BUS.View_Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using B_BUS.IServices;
 using B_BUS.Services;
-using System.Security.Cryptography;
+using B_BUS.View_Models;
 
 namespace C_GUI.QLForm
 {
@@ -33,17 +23,17 @@ namespace C_GUI.QLForm
         }
         public void LoadcmbChucVu()
         {
-            foreach (var a in _IQlNhanVien.GetAllView())
+            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
             {
-                cmb_chucvu.Items.Add(a.ChucVu.TenChucVu);
+                _ = cmb_chucvu.Items.Add(a.ChucVu.TenChucVu);
             }
         }
         public void LoadcmbCuaHang()
         {
 
-            foreach (var a in _IQlNhanVien.GetAllView())
+            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
             {
-                cmb_cuahang.Items.Add(a.CuaHang.TenCuaHang);
+                _ = cmb_cuahang.Items.Add(a.CuaHang.TenCuaHang);
             }
         }
         public void LoadData()
@@ -65,30 +55,30 @@ namespace C_GUI.QLForm
             dgrid_shownhanvien.Columns[12].Name = "trang thai";
             dgrid_shownhanvien.Rows.Clear();
             dgrid_shownhanvien.Columns[1].Visible = true;
-            foreach (var a in _IQlNhanVien.GetAllView())
+            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
             {
 
-                dgrid_shownhanvien.Rows.Add(stt++, a.NhanVien.Id, a.NhanVien.MaNhanVien, a.NhanVien.TenNhanVien, a.NhanVien.Email, a.NhanVien.GioiTinh==1?"nam":"nu", a.NhanVien.NgaySinh, a.NhanVien.Sdt, a.NhanVien.DiaChi, a.NhanVien.MatKhau, a.ChucVu.TenChucVu, a.CuaHang.TenCuaHang, a.NhanVien.TrangThai == 1 ? "hoạt động" : "Không hoạt động");
+                _ = dgrid_shownhanvien.Rows.Add(stt++, a.NhanVien.Id, a.NhanVien.MaNhanVien, a.NhanVien.TenNhanVien, a.NhanVien.Email, a.NhanVien.GioiTinh == 1 ? "nam" : "nu", a.NhanVien.NgaySinh, a.NhanVien.Sdt, a.NhanVien.DiaChi, a.NhanVien.MatKhau, a.ChucVu.TenChucVu, a.CuaHang.TenCuaHang, a.NhanVien.TrangThai == 1 ? "hoạt động" : "Không hoạt động");
             }
 
         }
 
         public NhanVien GetvaluaContro()
         {
-            var x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
+            ChucVuView? x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
 
-            var y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
+            CuaHangView? y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
             return new NhanVien()
             {
                 MaNhanVien = txt_ma.Texts,
                 TenNhanVien = txt_ten.Texts,
-                Email=txt_email.Texts,
+                Email = txt_email.Texts,
                 NgaySinh = dtt_ngaysinh.Value,
-                GioiTinh = (rbtn_nam.Checked == true ? 1 : 0),
+                GioiTinh = rbtn_nam.Checked == true ? 1 : 0,
                 Sdt = txt_sdt.Texts,
                 DiaChi = txt_diachi.Texts,
                 MatKhau = txt_matkhau.Texts,
-                TrangThai = (cbx_hoatdong.Checked == true ? 1 : 0),
+                TrangThai = cbx_hoatdong.Checked == true ? 1 : 0,
                 IdChucVu = x.ChucVu.Id,
                 IdCuaHang = y.CuaHang.Id,
             };
@@ -106,7 +96,7 @@ namespace C_GUI.QLForm
 
         private void label23_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dgrid_shownhanvien_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -116,11 +106,11 @@ namespace C_GUI.QLForm
             txt_ma.Texts = dgrid_shownhanvien.Rows[index].Cells[2].Value.ToString();
             txt_ten.Texts = dgrid_shownhanvien.Rows[index].Cells[3].Value.ToString();
             //txt_email.Texts = dgrid_shownhanvien.Rows[index].Cells[4].Value.ToString();
-            if ((dgrid_shownhanvien.Rows[index].Cells[5].Value.ToString()) == "nam")
+            if (dgrid_shownhanvien.Rows[index].Cells[5].Value.ToString() == "nam")
             {
                 rbtn_nam.Checked = true;
             }
-            if ((dgrid_shownhanvien.Rows[index].Cells[5].Value.ToString()) == "nu")
+            if (dgrid_shownhanvien.Rows[index].Cells[5].Value.ToString() == "nu")
             {
                 rbtn_nu.Checked = true;
             }
@@ -129,17 +119,17 @@ namespace C_GUI.QLForm
             txt_diachi.Texts = dgrid_shownhanvien.Rows[index].Cells[8].Value.ToString();
             txt_matkhau.Texts = dgrid_shownhanvien.Rows[index].Cells[9].Value.ToString();
 
-            var a = _IQlNhanVien.GetAllView().FirstOrDefault(c => c.NhanVien.Id == _ID).NhanVien;
+            NhanVien a = _IQlNhanVien.GetAllView().FirstOrDefault(c => c.NhanVien.Id == _ID).NhanVien;
             cmb_chucvu.SelectedItem = _IQlNhanVien.GetAllView().FirstOrDefault(c => c.NhanVien.IdChucVu == a.IdChucVu).ChucVu.TenChucVu;
             cmb_cuahang.SelectedItem = _IQlNhanVien.GetAllView().FirstOrDefault(c => c.NhanVien.IdCuaHang == a.IdCuaHang).CuaHang.TenCuaHang;
 
             ;
-            if ((dgrid_shownhanvien.Rows[index].Cells[12].Value.ToString()) == "hoạt động")
+            if (dgrid_shownhanvien.Rows[index].Cells[12].Value.ToString() == "hoạt động")
             {
                 cbx_hoatdong.Checked = true;
                 cbx_khonghoatdong.Checked = false;
             }
-            if ((dgrid_shownhanvien.Rows[index].Cells[12].Value.ToString()) == "không hoạt động")
+            if (dgrid_shownhanvien.Rows[index].Cells[12].Value.ToString() == "không hoạt động")
             {
                 cbx_hoatdong.Checked = false;
                 cbx_khonghoatdong.Checked = true;
@@ -148,25 +138,27 @@ namespace C_GUI.QLForm
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            _IQlNhanVien.Add(GetvaluaContro());
+            _ = _IQlNhanVien.Add(GetvaluaContro());
             LoadData();
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            var x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
+            ChucVuView? x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
 
-            var y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
-            bool thongBao = _IQlNhanVien.Update(new A_DAL.Entities.NhanVien() { Id = _ID,
+            CuaHangView? y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
+            bool thongBao = _IQlNhanVien.Update(new A_DAL.Entities.NhanVien()
+            {
+                Id = _ID,
                 MaNhanVien = txt_ma.Texts,
                 TenNhanVien = txt_ten.Texts,
                 Email = txt_email.Texts,
                 NgaySinh = dtt_ngaysinh.Value,
-                GioiTinh = (rbtn_nam.Checked == true ? 1 : 0),
+                GioiTinh = rbtn_nam.Checked == true ? 1 : 0,
                 Sdt = txt_sdt.Texts,
                 DiaChi = txt_diachi.Texts,
                 MatKhau = txt_matkhau.Texts,
-                TrangThai = (cbx_hoatdong.Checked == true ? 1 : 0),
+                TrangThai = cbx_hoatdong.Checked == true ? 1 : 0,
                 IdChucVu = x.ChucVu.Id,
                 IdCuaHang = y.CuaHang.Id,
             });
