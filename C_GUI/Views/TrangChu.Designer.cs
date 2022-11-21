@@ -55,7 +55,9 @@
             this._pnlmenu.Dock = System.Windows.Forms.DockStyle.Left;
             this._pnlmenu.Location = new System.Drawing.Point(0, 0);
             this._pnlmenu.Name = "_pnlmenu";
-            this._pnlmenu.Size = new System.Drawing.Size(250, 953);
+
+            this._pnlmenu.Size = new System.Drawing.Size(219, 961);
+
             this._pnlmenu.TabIndex = 0;
             // 
             // _btnBanhang
@@ -143,7 +145,9 @@
             this._pnltitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this._pnltitleBar.Location = new System.Drawing.Point(250, 0);
             this._pnltitleBar.Name = "_pnltitleBar";
-            this._pnltitleBar.Size = new System.Drawing.Size(1532, 125);
+
+            this._pnltitleBar.Size = new System.Drawing.Size(1365, 94);
+
             this._pnltitleBar.TabIndex = 1;
             // 
             // _rjbtndong
@@ -172,7 +176,9 @@
             this._lbltitle.AutoSize = true;
             this._lbltitle.Font = new System.Drawing.Font("Microsoft YaHei UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._lbltitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this._lbltitle.Location = new System.Drawing.Point(642, 53);
+
+            this._lbltitle.Location = new System.Drawing.Point(574, 40);
+
             this._lbltitle.Name = "_lbltitle";
             this._lbltitle.Size = new System.Drawing.Size(90, 35);
             this._lbltitle.TabIndex = 0;
@@ -183,14 +189,18 @@
             this._pnlDesktoppanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._pnlDesktoppanel.Location = new System.Drawing.Point(250, 125);
             this._pnlDesktoppanel.Name = "_pnlDesktoppanel";
-            this._pnlDesktoppanel.Size = new System.Drawing.Size(1532, 828);
+
+            this._pnlDesktoppanel.Size = new System.Drawing.Size(1365, 867);
+
             this._pnlDesktoppanel.TabIndex = 2;
             // 
             // TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1782, 953);
+
+            this.ClientSize = new System.Drawing.Size(1584, 961);
+
             this.Controls.Add(this._pnlDesktoppanel);
             this.Controls.Add(this._pnltitleBar);
             this.Controls.Add(this._pnlmenu);
