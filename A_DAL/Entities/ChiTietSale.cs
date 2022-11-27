@@ -9,9 +9,7 @@
         public Guid IdSale { get; set; }
         public Guid IdChiTietGiay { get; set; }
         public int TrangThai { get; set; } = 0!;
-
         public Sale IdSaleNavigation { get; set; } = null!;
-
         public ChiTietGiay IdChiTietGiayNavigation { get; set; } = null!;
     }
 }

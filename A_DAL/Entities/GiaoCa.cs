@@ -17,7 +17,6 @@
         public float TienPhatSinh { get; set; } = 0!;
         public string? ChuThich { get; set; }
         public int TrangThai { get; set; } = 0!;
-
         public NhanVien IdNhanVienNavigation { get; set; } = null!;
         public NhanVien IdNhanVienTiepQuanNavigation { get; set; } = null!;
     }

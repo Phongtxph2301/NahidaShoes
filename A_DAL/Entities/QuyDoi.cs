@@ -10,7 +10,6 @@
         public string MaQuyDoi { get; set; } = null!;
         public float TiLeQuyDoi { get; set; } = 0!;
         public int TrangThai { get; set; } = 0!;
-
         public ICollection<LichSuDiemTieuDung> LichSuDiemTieuDungs { get; set; }
     }
 }

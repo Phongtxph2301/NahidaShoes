@@ -11,9 +11,7 @@
         public float SoTienThanhToan { get; set; } = 0!;
         public string? GhiChu { get; set; }
         public int TrangThai { get; set; } = 0!;
-
         public PhuongThucThanhToan IdPhuongThucThanhToanNavigation { get; set; } = null!;
-
         public HoaDon IdHoaDonNavigation { get; set; } = null!;
     }
 }

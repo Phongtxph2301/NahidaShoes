@@ -11,9 +11,7 @@
         public int SoLuong { get; set; } = 0!;
         public float DonGia { get; set; } = 0!;
         public int TrangThai { get; set; } = 0!;
-
         public ChiTietGiay IdChiTietGiayNavigation { get; set; } = null!;
-
         public HoaDon IdHoaDonNavigation { get; set; } = null!;
     }
 }

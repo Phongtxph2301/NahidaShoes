@@ -15,7 +15,6 @@
         public string? Email { get; set; }
         public string SoCCCD { get; set; } = null!;
         public int TrangThai { get; set; } = 0!;
-
         public ICollection<HoaDon> HoaDons { get; set; }
         public DiemTieuDung DiemTieuDung { get; set; } = null!;
     }

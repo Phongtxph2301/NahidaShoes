@@ -48,6 +48,21 @@ namespace C_GUI.Views
 
         private void _btnThanhToan_Click(object sender, EventArgs e)
         {
+            HoaDon hoaDon = _qlHoaDon.GetAll().Find(c => c.Id == FormBanHang.idHoaDon);
+            if (hoaDon.PhuongThucMua == 1 && hoaDon.TrangThai != 2)
+            {
+                DialogResult result = MessageBox.Show("Đây là hóa đơn đặt hàng online khi thanh toán sẽ thực hiện ship cho khách. Hãy chắc chắn rằng khách hàng đã đồng ý với các điều khoản của cửa hàng về sản phẩm và đồng ý với phí ship đã định", "Thông báo", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    thanhToan(hoaDon);
+                    return;
+                }
+            }
+            thanhToan(hoaDon);
+        }
+
+        private void thanhToan(HoaDon hoaDon)
+        {
             try
             {
                 float giamGia = Convert.ToSingle(_tbxGiamGia.Texts);
@@ -64,27 +79,26 @@ namespace C_GUI.Views
             }
             else if (Convert.ToSingle(_tbxTienKhachDua.Texts) == Convert.ToSingle(_tbxTongTien.Texts))
             {
-                HoaDon hoaDon = _qlHoaDon.GetAll().Find(c => c.Id == FormBanHang.idHoaDon);
+
                 hoaDon.TrangThai = 1;
                 hoaDon.ThoiGianThanhToan = DateTime.Now;
                 hoaDon.GiamGia = Convert.ToSingle(_tbxGiamGia.Texts);
                 hoaDon.GhiChu = _tbxGhiChu.Texts;
                 _ = _qlHoaDon.Update(hoaDon);
                 _ = MessageBox.Show("Thanh toán thành công");
-                Application.Restart();
+                Close();
             }
             else
             {
                 float soDu = Convert.ToSingle(_tbxTienKhachDua.Texts) - Convert.ToSingle(_tbxTongTien.Texts);
                 _ = MessageBox.Show($"Còn dư {soDu}");
-                HoaDon hoaDon = _qlHoaDon.GetAll().Find(c => c.Id == FormBanHang.idHoaDon);
                 hoaDon.TrangThai = 1;
                 hoaDon.ThoiGianThanhToan = DateTime.Now;
                 hoaDon.GiamGia = Convert.ToSingle(_tbxGiamGia.Texts);
                 hoaDon.GhiChu = _tbxGhiChu.Texts;
                 _ = _qlHoaDon.Update(hoaDon);
                 _ = MessageBox.Show("Thanh toán thành công");
-                Application.Restart();
+                Close();
             }
         }
 

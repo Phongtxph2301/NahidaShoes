@@ -11,11 +11,8 @@
         public Guid IdQuyDoi { get; set; }
         public float GiaTriQuyDoi { get; set; } = 0!;
         public int TrangThai { get; set; } = 0!;
-
         public HoaDon IdHoaDonNavigation { get; set; } = null!;
-
         public DiemTieuDung IdDiemTieuDungNavigation { get; set; } = null!;
-
         public QuyDoi IdQuyDoiNavigation { get; set; } = null!;
     }
 }

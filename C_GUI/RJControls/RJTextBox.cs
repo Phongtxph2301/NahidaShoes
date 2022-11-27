@@ -346,10 +346,7 @@ namespace C_GUI.RJControls
         #region -> TextBox events
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (_TextChanged != null)
-            {
-                _TextChanged.Invoke(sender, e);
-            }
+            _TextChanged?.Invoke(sender, e);
         }
         private void textBox1_Click(object sender, EventArgs e)
         {

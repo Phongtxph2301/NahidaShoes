@@ -7,7 +7,6 @@
             LichSuDiemTieuDungs = new HashSet<LichSuDiemTieuDung>();
         }
         public Guid Id { get; set; }
-
         public string MaDiemTieuDung { get; set; } = null!;
         public Guid IdKhachHang { get; set; }
         public float SoDiem { get; set; } = 0!;

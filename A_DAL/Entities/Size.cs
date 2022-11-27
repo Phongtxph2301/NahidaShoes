@@ -7,7 +7,6 @@
             ChiTietGiays = new HashSet<ChiTietGiay>();
         }
         public Guid Id { get; set; }
-
         public string MaSize { get; set; } = null!;
         public string TenSize { get; set; } = null!;
         public int SoSize { get; set; } = 0!;

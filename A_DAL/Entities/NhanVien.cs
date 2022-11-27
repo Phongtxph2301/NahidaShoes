@@ -6,6 +6,7 @@
         {
             HoaDons = new HashSet<HoaDon>();
             GiaoCas = new HashSet<GiaoCa>();
+            GiaoCaTiepQuans = new HashSet<GiaoCa>();
         }
         public Guid Id { get; set; }
         public Guid IdChucVu { get; set; }
@@ -19,11 +20,8 @@
         public string Sdt { get; set; } = null!;
         public int GioiTinh { get; set; } = 0!;
         public int TrangThai { get; set; } = 0!;
-
         public ChucVu IdChucVuNavigation { get; set; } = null!;
-
         public CuaHang IdCuaHangNavigation { get; set; } = null!;
-
         public ICollection<HoaDon> HoaDons { get; set; }
         public ICollection<GiaoCa> GiaoCas { get; set; }
         public ICollection<GiaoCa> GiaoCaTiepQuans { get; set; }

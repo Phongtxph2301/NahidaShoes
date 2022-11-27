@@ -56,10 +56,7 @@
         }
         private void OpenChildForm(Form childForm, object btnSender)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
+            activeForm?.Close();
 
             ActivateButton(btnSender);
             activeForm = childForm;
@@ -106,11 +103,7 @@
 
         private void _rjbtndong_Click_1(object sender, EventArgs e)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
-
+            activeForm?.Close();
             Reset();
         }
 
