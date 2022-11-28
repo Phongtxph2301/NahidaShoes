@@ -1,16 +1,6 @@
-﻿using A_DAL.Entities;
-using B_BUS.IServices;
+﻿using B_BUS.IServices;
 using B_BUS.Services;
 using B_BUS.View_Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Size = A_DAL.Entities.Size;
 
 namespace C_GUI.QLForm
@@ -20,8 +10,8 @@ namespace C_GUI.QLForm
 
         public IQLSize _IQLSize;
         private Guid _ID;
-    
-   
+
+
 
         public FormSize()
         {
@@ -34,7 +24,7 @@ namespace C_GUI.QLForm
             int stt = 1;
             dgrid_showSize.ColumnCount = 4;
             dgrid_showSize.Columns[0].Name = "stt";
-         
+
             dgrid_showSize.Columns[2].Name = "ma";
             dgrid_showSize.Columns[3].Name = "ten";
             dgrid_showSize.Columns[1].Visible = true;

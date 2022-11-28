@@ -13,6 +13,8 @@ namespace C_GUI.Views
         private readonly IQLNhanVien _qlNhanVien;
         private readonly IQLHoaDon _qlHoaDon;
         private readonly IQLGiay _qlGiay;
+        private readonly IQLMauSac _qlMauSac;
+        private readonly IQLHangGiay _qlHangGiay;
         public static Guid idHoaDon;
         private readonly Guid idHoaDonDefaut;
         private readonly ListViewColumnSorter lvwColumnSorter;
@@ -26,23 +28,29 @@ namespace C_GUI.Views
             _qlNhanVien = new QLNhanVien();
             _qlHoaDon = new QLHoaDon();
             _qlGiay = new QLGiay();
+            _qlMauSac = new QLMauSac();
+            _qlHangGiay = new QLHangGiay();
             LoadChiTietGiay(_qlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList());
             LoadComboBox();
-            LoadHoaDonCho(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == 0).ToList());
-            LoadHoaDonChuaThanhToan(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai != 1).ToList());
+            LoadHoaDon(_qlHoaDon.GetAllView().ToList());
             idHoaDonDefaut = Guid.NewGuid();
             idHoaDon = idHoaDonDefaut;
-            if (_lsvHoaDonCho.Items.Count > 0)
+            if (_lsvHoaDon.Items.Count > 0)
             {
-                idHoaDon = new Guid(_lsvHoaDonCho.Items[0].Text);
+                idHoaDon = new Guid(_lsvHoaDon.Items[0].Text);
             }
             LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
             lvwColumnSorter = new ListViewColumnSorter();
             _lsvShowSanPham.ListViewItemSorter = lvwColumnSorter;
-            _lsvHoaDonCho.ListViewItemSorter = lvwColumnSorter;
+            _lsvHoaDon.ListViewItemSorter = lvwColumnSorter;
             _lsvGioHang.ListViewItemSorter = lvwColumnSorter;
-            _lsvHoaDonChuaThanhToan.ListViewItemSorter = lvwColumnSorter;
             _cbxPhuongThucMua.SelectedItem = "Mua tại cửa hàng";
+            LoadData(idHoaDon);
+            _cbxTimKiemHoaDon.SelectedItem = "Tất cả hóa đơn";
+            _cbxTimKiemGioHang.SelectedItem = "Tất cả mã giày";
+            _cbxTimKiemTenGiay.SelectedItem = "Tất cả tên giày";
+            _cbxTimKiemMauSac.SelectedItem = "Tất cả màu sắc";
+            _cbxTimKiemHangGiay.SelectedItem = "Tất cả hãng giày";
         }
 
         private void LoadChiTietGiay(List<ChiTietGiayView> lstChiTietGiayView)
@@ -61,40 +69,26 @@ namespace C_GUI.Views
             _lsvGioHang.Items.Clear();
             foreach (B_BUS.View_Models.HoaDonChiTietView item in lstHoaDonChiTietView)
             {
-                string[] row = { item.HoaDonChiTiet.Id.ToString(), _qlGiay.GetAll().Find(c => c.Id == item.ChTietGiay.IdGiay).MaGiay, item.HoaDonChiTiet.DonGia.ToString(), item.HoaDonChiTiet.SoLuong.ToString() };
+                string[] row = { item.HoaDonChiTiet.Id.ToString(), _qlGiay.GetAll().Find(c => c.Id == item.ChTietGiay.IdGiay).MaGiay, item.HoaDonChiTiet.DonGia.ToString(), item.HoaDonChiTiet.SoLuong.ToString(), (item.HoaDonChiTiet.DonGia * item.HoaDonChiTiet.SoLuong).ToString() };
                 ListViewItem listViewItem = new(row);
                 _ = _lsvGioHang.Items.Add(listViewItem);
             }
         }
 
-        private void LoadHoaDonCho(List<HoaDonView> lstHoaDonView)
+        private void LoadHoaDon(List<HoaDonView> lstHoaDonView)
         {
-            _lsvHoaDonCho.Items.Clear();
+            _lsvHoaDon.Items.Clear();
             foreach (B_BUS.View_Models.HoaDonView item in lstHoaDonView)
             {
-                string[] row = { item.HoaDon.Id.ToString(), item.HoaDon.MaHoaDon, item.HoaDon.PhuongThucMua == 0 ? "Mua tại cửa hàng" : "Đặt hàng online" };
+                string[] row = { item.HoaDon.Id.ToString(), item.HoaDon.MaHoaDon, item.HoaDon.PhuongThucMua == 0 ? "Mua tại cửa hàng" : "Đặt hàng online", item.HoaDon.TrangThai == 0 ? "Hóa đơn chờ" : item.HoaDon.TrangThai == 1 ? "Hóa đơn đã kết thúc" : "Hóa đơn đã ship", item.HoaDon.GhiChu };
                 ListViewItem listViewItem = new(row);
-                _ = _lsvHoaDonCho.Items.Add(listViewItem);
+                _ = _lsvHoaDon.Items.Add(listViewItem);
             }
-            if (_lsvHoaDonCho.Items.Count > 0)
+            if (_lsvHoaDon.Items.Count > 0)
             {
-                idHoaDon = new Guid(_lsvHoaDonCho.Items[0].Text);
+                idHoaDon = new Guid(_lsvHoaDon.Items[0].Text);
             }
-        }
-
-        private void LoadHoaDonChuaThanhToan(List<HoaDonView> lstHoaDonView)
-        {
-            _lsvHoaDonChuaThanhToan.Items.Clear();
-            foreach (B_BUS.View_Models.HoaDonView item in lstHoaDonView)
-            {
-                string[] row = { item.HoaDon.Id.ToString(), item.HoaDon.MaHoaDon, item.HoaDon.PhuongThucMua == 0 ? "Mua tại cửa hàng" : "Đặt hàng online" };
-                ListViewItem listViewItem = new(row);
-                _ = _lsvHoaDonChuaThanhToan.Items.Add(listViewItem);
-            }
-            if (_lsvHoaDonChuaThanhToan.Items.Count > 0)
-            {
-                idHoaDon = new Guid(_lsvHoaDonChuaThanhToan.Items[0].Text);
-            }
+            LoadData(idHoaDon);
         }
 
         private void LoadComboBox()
@@ -107,29 +101,41 @@ namespace C_GUI.Views
             {
                 _ = _cbxNhanVien.Items.Add(item.MaNhanVien);
             }
+            foreach (Giay item in _qlGiay.GetAll())
+            {
+                _ = _cbxTimKiemGioHang.Items.Add(item.MaGiay);
+            }
+            foreach (Giay item in _qlGiay.GetAll())
+            {
+                _ = _cbxTimKiemTenGiay.Items.Add(item.TenGiay);
+            }
+            foreach (MauSac item in _qlMauSac.GetAll())
+            {
+                _ = _cbxTimKiemMauSac.Items.Add(item.TenMauSac);
+            }
+            foreach (HangGiay item in _qlHangGiay.GetAll())
+            {
+                _ = _cbxTimKiemHangGiay.Items.Add(item.TenHangGiay);
+            }
         }
 
         private void _btnTaoHoaDon_Click(object sender, EventArgs e)
         {
-            if (_cbxNhanVien.SelectedItem != null && _cbxKhachHang.SelectedItem != null && _tbxMaHoaDon.Texts.Trim() != "")
+            if (_cbxNhanVien.SelectedItem != null && _cbxKhachHang.SelectedItem != null)
             {
-                string maHoaDon = _tbxMaHoaDon.Texts.Trim();
+                string maHoaDon = "HD0";
+                if (_qlHoaDon.GetAll().Count > 0)
+                {
+                    maHoaDon = "HD" + _qlHoaDon.GetAll().Max(c => Convert.ToInt32(c.MaHoaDon[2..]) + 1);
+                }
                 Guid idKhachHang = _qlKhachHang.GetByMa(_cbxKhachHang.SelectedItem.ToString()).Id;
                 Guid idNhanVien = _qlNhanVien.GetByMa(_cbxNhanVien.SelectedItem.ToString()).Id;
                 int phuongThucMua = _cbxPhuongThucMua.SelectedItem.ToString() == "Đặt hàng online" ? 1 : 0;
-                if (_qlHoaDon.CheckMa(maHoaDon))
+                bool thongBao = _qlHoaDon.Add(new HoaDon() { MaHoaDon = maHoaDon, IdKhachHang = idKhachHang, IdNhanVien = idNhanVien, PhuongThucMua = phuongThucMua });
+                if (thongBao)
                 {
-                    bool thongBao = _qlHoaDon.Add(new HoaDon() { MaHoaDon = maHoaDon, IdKhachHang = idKhachHang, IdNhanVien = idNhanVien, PhuongThucMua = phuongThucMua });
-                    if (thongBao)
-                    {
-                        _ = MessageBox.Show("Thêm thành công");
-                        LoadHoaDonChuaThanhToan(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai != 1).ToList());
-                        LoadHoaDonCho(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == 0).ToList());
-                    }
-                }
-                else
-                {
-                    _ = MessageBox.Show("Mã hóa đơn đã tồn tại");
+                    _ = MessageBox.Show("Thêm thành công");
+                    LoadHoaDon(_qlHoaDon.GetAllView().ToList());
                 }
             }
         }
@@ -163,11 +169,11 @@ namespace C_GUI.Views
             }
         }
 
-        private void _lsvHoaDonCho_DoubleClick(object sender, EventArgs e)
+        private void _lsvHoaDon_DoubleClick(object sender, EventArgs e)
         {
-            if (_lsvHoaDonCho.SelectedItems.Count > 0)
+            if (_lsvHoaDon.SelectedItems.Count > 0)
             {
-                idHoaDon = new Guid(_lsvHoaDonCho.SelectedItems[0].Text);
+                idHoaDon = new Guid(_lsvHoaDon.SelectedItems[0].Text);
                 LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
                 LoadData(idHoaDon);
             }
@@ -175,30 +181,70 @@ namespace C_GUI.Views
 
         private void _lsvGioHang_DoubleClick(object sender, EventArgs e)
         {
-            Guid idHoaDonChiTiet = new(_lsvGioHang.SelectedItems[0].Text);
-            HoaDonChiTiet hoaDonChiTiet = _qlHoaDonChiTiet.GetAll().Find(c => c.Id == idHoaDonChiTiet);
-            ChiTietGiay? chiTietGiay = _qlChiTietGiay.GetAll().FirstOrDefault(c => c.Id == hoaDonChiTiet.IdChiTietGiay);
-            if (hoaDonChiTiet.SoLuong > 1)
+            if (_qlHoaDon.GetAll().Find(c => c.Id == idHoaDon).TrangThai == 0)
             {
-                hoaDonChiTiet.SoLuong--;
-                _ = _qlHoaDonChiTiet.Update(hoaDonChiTiet);
+                Guid idHoaDonChiTiet = new(_lsvGioHang.SelectedItems[0].Text);
+                HoaDonChiTiet hoaDonChiTiet = _qlHoaDonChiTiet.GetAll().Find(c => c.Id == idHoaDonChiTiet);
+                ChiTietGiay? chiTietGiay = _qlChiTietGiay.GetAll().FirstOrDefault(c => c.Id == hoaDonChiTiet.IdChiTietGiay);
+                if (hoaDonChiTiet.SoLuong > 1)
+                {
+                    hoaDonChiTiet.SoLuong--;
+                    _ = _qlHoaDonChiTiet.Update(hoaDonChiTiet);
+                }
+                else
+                {
+                    _ = _qlHoaDonChiTiet.Delete(hoaDonChiTiet);
+                }
+                chiTietGiay.SoLuongTon++;
+                _ = _qlChiTietGiay.Update(chiTietGiay);
+                LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
+                LoadChiTietGiay(_qlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList());
             }
-            else
-            {
-                _ = _qlHoaDonChiTiet.Delete(hoaDonChiTiet);
-            }
-            chiTietGiay.SoLuongTon++;
-            _ = _qlChiTietGiay.Update(chiTietGiay);
-            LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
-            LoadChiTietGiay(_qlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList());
         }
 
         private void _btnThanhToan_Click(object sender, EventArgs e)
         {
+            try
+            {
+                float giamGia = Convert.ToSingle(_tbxGiamGia.Texts);
+                float tienKhachDua = Convert.ToSingle(_tbxTienKhachDua.Texts);
+            }
+            catch (Exception)
+            {
+                _ = MessageBox.Show("Kiểm tra lại các giá trị đầu vào");
+                return;
+            }
             if (idHoaDon != idHoaDonDefaut)
             {
-                FormThanhToan formThanhToan = new();
-                formThanhToan.Show();
+                if (_qlHoaDon.GetAll().Find(c => c.Id == idHoaDon).TrangThai != 1)
+                {
+                    if (Convert.ToSingle(_tbxTienThua.Texts) >= 0)
+                    {
+                        HoaDon hoaDon = _qlHoaDon.GetAll().Find(c => c.Id == idHoaDon);
+                        if (hoaDon.PhuongThucMua == 1 && hoaDon.TrangThai != 2)
+                        {
+                            DialogResult result = MessageBox.Show("Đây là hóa đơn đặt hàng online khi thanh toán sẽ thực hiện ship cho khách. Hãy chắc chắn rằng khách hàng đã đồng ý với các điều khoản của cửa hàng về sản phẩm và đồng ý với phí ship đã định", "Thông báo", MessageBoxButtons.OKCancel);
+                            if (result == DialogResult.OK)
+                            {
+                                hoaDon.TrangThai = 1;
+                                hoaDon.ThoiGianThanhToan = DateTime.Now;
+                                hoaDon.GiamGia = Convert.ToSingle(_tbxGiamGia.Texts);
+                                hoaDon.GhiChu = _tbxGhiChu.Texts;
+                                _ = _qlHoaDon.Update(hoaDon);
+                                _ = MessageBox.Show("Thanh toán thành công");
+                                LoadHoaDon(_qlHoaDon.GetAllView().ToList());
+                                return;
+                            }
+                        }
+                        hoaDon.TrangThai = 1;
+                        hoaDon.ThoiGianThanhToan = DateTime.Now;
+                        hoaDon.GiamGia = Convert.ToSingle(_tbxGiamGia.Texts);
+                        hoaDon.GhiChu = _tbxGhiChu.Texts;
+                        _ = _qlHoaDon.Update(hoaDon);
+                        _ = MessageBox.Show("Thanh toán thành công");
+                        LoadHoaDon(_qlHoaDon.GetAllView().ToList());
+                    }
+                }
             }
         }
 
@@ -206,9 +252,14 @@ namespace C_GUI.Views
         {
             HoaDonView hoaDon = _qlHoaDon.GetAllView().Find(c => c.HoaDon.Id == idHoaDon);
             _tbxMaHoaDon.Texts = hoaDon.HoaDon.MaHoaDon;
-            _cbxKhachHang.SelectedItem = hoaDon.KhachHang.MaKhachHang;
-            _cbxNhanVien.SelectedItem = hoaDon.NhanVien.MaNhanVien;
-            _cbxPhuongThucMua.SelectedItem = hoaDon.HoaDon.PhuongThucMua == 0 ? "Mua tại cửa hàng" : "Đặt hàng online";
+            float tongTien = 0;
+            foreach (HoaDonChiTiet? item in _qlHoaDonChiTiet.GetAll().Where(c => c.IdHoaDon == FormBanHang.idHoaDon))
+            {
+                tongTien += item.SoLuong * item.DonGia;
+            }
+            _tbxTongTien.Texts = tongTien.ToString();
+            _tbxTienKhachDua.Texts = "0";
+            _tbxTienThua.Texts = (Convert.ToSingle(_tbxTienKhachDua.Texts) - Convert.ToSingle(_tbxTongTien.Texts)).ToString();
         }
 
         private void _lsvShowSanPham_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -249,7 +300,7 @@ namespace C_GUI.Views
             _lsvGioHang.Sort();
         }
 
-        private void _lsvHoaDonCho_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void _lsvHoaDon_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             // Determine if clicked column is already the column that is being sorted.
             if (e.Column == lvwColumnSorter.SortColumn)
@@ -265,43 +316,7 @@ namespace C_GUI.Views
             }
 
             // Perform the sort with these new sort options.
-            _lsvHoaDonCho.Sort();
-        }
-
-        private void _tbxTimKiemThongTinSanPham__TextChanged(object sender, EventArgs e)
-        {
-            if (_tbxTimKiemThongTinSanPham.Texts.Trim() != "")
-            {
-                LoadChiTietGiay(_qlChiTietGiay.GetAllView().Where(c => c.Giay.TenGiay.Contains(_tbxTimKiemThongTinSanPham.Texts.Trim())).ToList());
-            }
-            else
-            {
-                LoadChiTietGiay(_qlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList());
-            }
-        }
-
-        private void _tbxTimKiemGioHang__TextChanged(object sender, EventArgs e)
-        {
-            if (_tbxTimKiemGioHang.Texts.Trim() != "")
-            {
-                LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon && _qlGiay.GetAll().Find(b => b.Id == c.ChTietGiay.IdGiay).MaGiay.Contains(_tbxTimKiemGioHang.Texts.Trim())).ToList());
-            }
-            else
-            {
-                LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
-            }
-        }
-
-        private void _tbxTimKiemHoaDonCho__TextChanged(object sender, EventArgs e)
-        {
-            if (_tbxTimKiemHoaDonCho.Texts.Trim() != "")
-            {
-                LoadHoaDonCho(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == 0 && c.HoaDon.MaHoaDon.Contains(_tbxTimKiemHoaDonCho.Texts.Trim())).ToList());
-            }
-            else
-            {
-                LoadHoaDonCho(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == 0).ToList());
-            }
+            _lsvHoaDon.Sort();
         }
 
         private void _btnShipHang_Click(object sender, EventArgs e)
@@ -309,7 +324,7 @@ namespace C_GUI.Views
             if (idHoaDon != idHoaDonDefaut)
             {
                 HoaDon hoaDon = _qlHoaDon.GetAll().Find(c => c.Id == idHoaDon);
-                if (hoaDon.TrangThai != 2)
+                if (hoaDon.TrangThai == 0)
                 {
                     if (hoaDon.PhuongThucMua == 1)
                     {
@@ -320,7 +335,7 @@ namespace C_GUI.Views
                             hoaDon.TrangThai = 2;
                             _ = _qlHoaDon.Update(hoaDon);
                             _ = MessageBox.Show("Đã gửi yêu cầu ship hàng hóa đơn này");
-                            LoadHoaDonCho(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == 0).ToList());
+                            LoadHoaDon(_qlHoaDon.GetAllView().ToList());
                         }
                     }
                     else
@@ -335,45 +350,115 @@ namespace C_GUI.Views
             }
         }
 
-        private void _tbxTimKienHoaDonchuaThanhToan__TextChanged(object sender, EventArgs e)
+        private void _tbxTienKhachDua__TextChanged(object sender, EventArgs e)
         {
-            if (_tbxTimKienHoaDonChuaThanhToan.Texts.Trim() != "")
+            try
             {
-                LoadHoaDonChuaThanhToan(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai != 1 && c.HoaDon.MaHoaDon.Contains(_tbxTimKienHoaDonChuaThanhToan.Texts.Trim())).ToList());
+                float tienKhachDua = Convert.ToSingle(_tbxTienKhachDua.Texts);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            _tbxTienThua.Texts = (Convert.ToSingle(_tbxTienKhachDua.Texts) - Convert.ToSingle(_tbxTongTien.Texts)).ToString();
+        }
+
+        private void _tbxGiamGia__TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                float giamGia = Convert.ToSingle(_tbxGiamGia.Texts);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            float tongTien = 0;
+            foreach (HoaDonChiTiet? item in _qlHoaDonChiTiet.GetAll().Where(c => c.IdHoaDon == idHoaDon))
+            {
+                tongTien += item.SoLuong * item.DonGia;
+            }
+            tongTien -= Convert.ToSingle(_tbxGiamGia.Texts);
+            if (tongTien < 0)
+            {
+                tongTien = 0;
+            }
+            _tbxTongTien.Texts = tongTien.ToString();
+            _tbxTienThua.Texts = (Convert.ToSingle(_tbxTienKhachDua.Texts) - Convert.ToSingle(_tbxTongTien.Texts)).ToString();
+        }
+
+        private void _cbxTimKiemHoaDon_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            int trangThai = _cbxTimKiemHoaDon.SelectedItem == "Tất cả hóa đơn" ? -1 : _cbxTimKiemHoaDon.SelectedItem == "Hóa đơn chờ" ? 0 : _cbxTimKiemHoaDon.SelectedItem == "Hóa đơn đã ship" ? 2 : 1;
+            if (trangThai == -1)
+            {
+                LoadHoaDon(_qlHoaDon.GetAllView().ToList());
             }
             else
             {
-                LoadHoaDonChuaThanhToan(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai != 1).ToList());
+                LoadHoaDon(_qlHoaDon.GetAllView().Where(c => c.HoaDon.TrangThai == trangThai).ToList());
             }
         }
 
-        private void _lsvHoaDonChuaThanhToan_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void _cbxTimKiemGioHang_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            // Determine if clicked column is already the column that is being sorted.
-            if (e.Column == lvwColumnSorter.SortColumn)
+            string maGiay = _cbxTimKiemGioHang.SelectedItem == "Tất cả mã giày" ? "-1" : _cbxTimKiemGioHang.SelectedItem.ToString();
+            if (maGiay == "-1")
             {
-                // Reverse the current sort direction for this column.
-                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-            }
-            else
-            {
-                // Set the column number that is to be sorted; default to ascending.
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
-            }
-
-            // Perform the sort with these new sort options.
-            _lsvHoaDonChuaThanhToan.Sort();
-        }
-
-        private void _lsvHoaDonChuaThanhToan_DoubleClick(object sender, EventArgs e)
-        {
-            if (_lsvHoaDonChuaThanhToan.SelectedItems.Count > 0)
-            {
-                idHoaDon = new Guid(_lsvHoaDonChuaThanhToan.SelectedItems[0].Text);
                 LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon).ToList());
-                LoadData(idHoaDon);
             }
+            else
+            {
+                LoadChiTietHoaDon(_qlHoaDonChiTiet.GetAllView().Where(c => c.HoaDonChiTiet.IdHoaDon == idHoaDon && _qlGiay.GetAll().Find(d => d.Id == c.ChTietGiay.IdGiay).MaGiay == maGiay).ToList());
+            }
+        }
+
+        private void LocChiTietGiay()
+        {
+            if (_cbxTimKiemTenGiay.SelectedItem == null || _cbxTimKiemMauSac.SelectedItem == null || _cbxTimKiemHangGiay.SelectedItem == null)
+            {
+                return;
+            }
+
+            List<ChiTietGiayView> lstChiTietGiayView = _qlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList();
+            string tenGiay = _cbxTimKiemTenGiay.SelectedItem == "Tất cả tên giày" ? "-1" : _cbxTimKiemTenGiay.SelectedItem.ToString();
+            if (tenGiay != "-1")
+            {
+                lstChiTietGiayView = lstChiTietGiayView.Where(c => c.Giay.TenGiay == tenGiay).ToList();
+            }
+            string tenMauSac = _cbxTimKiemMauSac.SelectedItem == "Tất cả màu sắc" ? "-1" : _cbxTimKiemMauSac.SelectedItem.ToString();
+            if (tenMauSac != "-1")
+            {
+                lstChiTietGiayView = lstChiTietGiayView.Where(c => c.MauSac.TenMauSac == tenMauSac).ToList();
+            }
+            string tenHangGiay = _cbxTimKiemHangGiay.SelectedItem == "Tất cả hãng giày" ? "-1" : _cbxTimKiemHangGiay.SelectedItem.ToString();
+            if (tenHangGiay != "-1")
+            {
+                lstChiTietGiayView = lstChiTietGiayView.Where(c => c.HangGiay.TenHangGiay == tenHangGiay).ToList();
+            }
+            LoadChiTietGiay(lstChiTietGiayView);
+        }
+
+        private void _cbxTimKiemTenGiay_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocChiTietGiay();
+        }
+
+        private void _cbxTimKiemMauSac_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocChiTietGiay();
+        }
+
+        private void _cbxTimKiemHangGiay_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocChiTietGiay();
+        }
+
+        private void _btnBoLoc_Click(object sender, EventArgs e)
+        {
+            _cbxTimKiemTenGiay.SelectedItem = "Tất cả tên giày";
+            _cbxTimKiemMauSac.SelectedItem = "Tất cả màu sắc";
+            _cbxTimKiemHangGiay.SelectedItem = "Tất cả hãng giày";
         }
     }
 }

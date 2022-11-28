@@ -2,15 +2,6 @@
 using B_BUS.IServices;
 using B_BUS.Services;
 using B_BUS.View_Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace C_GUI.QLForm
 {
@@ -18,11 +9,11 @@ namespace C_GUI.QLForm
     {
         public IQLGiay _IQLGiay;
         private Guid _ID;
-      
+
 
         public FormGiay()
         {
-            _IQLGiay= new QLGiay();    
+            _IQLGiay = new QLGiay();
             InitializeComponent();
             LoadData();
         }
@@ -31,9 +22,9 @@ namespace C_GUI.QLForm
             int stt = 1;
             dgrid_showGiay.ColumnCount = 3;
             dgrid_showGiay.Columns[0].Name = "stt";
-         
+
             dgrid_showGiay.Columns[1].Name = "ma";
-            dgrid_showGiay.Columns[2].Name = "ten";       
+            dgrid_showGiay.Columns[2].Name = "ten";
             dgrid_showGiay.Columns[1].Visible = true;
             foreach (GiayView a in _IQLGiay.GetAllView())
             {
