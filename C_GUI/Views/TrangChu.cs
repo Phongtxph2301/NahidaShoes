@@ -1,17 +1,21 @@
-﻿namespace C_GUI.Views
+﻿using A_DAL.Entities;
+
+namespace C_GUI.Views
 {
     public partial class TrangChu : Form
     {
         private Button? currentButton;
         private readonly Random random;
         private int tempIndex;
-        private Form activeForm;
+        private Form? activeForm;
+        public static NhanVien NhanVienLogin;
 
         public TrangChu()
         {
             InitializeComponent();
             random = new Random();
             _rjbtndong.Visible = false;
+            _lblMaNhanVien.Text = NhanVienLogin.MaNhanVien + " - " + NhanVienLogin.TenNhanVien;
         }
 
         private Color SelectThemeColor()
@@ -110,6 +114,16 @@
         private void _btnBanhang_Click_1(object sender, EventArgs e)
         {
             OpenChildForm(new FormBanHang(), sender);
+        }
+
+        private void TrangChu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.Login.Close();
+        }
+
+        private void _btnDangXuat_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
