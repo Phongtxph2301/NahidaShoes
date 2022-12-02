@@ -9,7 +9,8 @@
         public Guid Id { get; set; }
         public string MaGiamGia { get; set; } = null!;
         public string TenChuongTrinh { get; set; } = null!;
-        public int LuaChonGiamGia { get; set; } = 0!;
+        public float PhanTramGiamGia { get; set; } = 0!;
+        public float SoTiemGiamGia { get; set; } = 0!;
         public DateTime NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public int TrangThai { get; set; } = 0!;

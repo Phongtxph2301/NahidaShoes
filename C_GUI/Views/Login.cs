@@ -16,18 +16,18 @@ namespace C_GUI.Views
         {
             string maNhanVien = _tbxMaNhanVien.Texts;
             string matKhau = _tbxMatKhau.Texts;
-            foreach (var item in _qlNhanVien.GetAll())
+            foreach (A_DAL.Entities.NhanVien item in _qlNhanVien.GetAll())
             {
                 if (item.MaNhanVien == maNhanVien && item.MatKhau == matKhau)
                 {
                     TrangChu.NhanVienLogin = _qlNhanVien.GetAll().FirstOrDefault(c => c.MaNhanVien == maNhanVien);
                     TrangChu trangChu = new();
                     trangChu.Show();
-                    this.Hide();
+                    Hide();
                     return;
                 }
             }
-            MessageBox.Show("Sai mã nhân viên hoặc mật khẩu");
+            _ = MessageBox.Show("Sai mã nhân viên hoặc mật khẩu");
         }
     }
 }
