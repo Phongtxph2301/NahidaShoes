@@ -37,6 +37,11 @@ namespace B_BUS.Services
             return _igchitietsale.Delete(obj);
         }
 
+        public List<ChiTietSale> GetAll()
+        {
+            return _igchitietsale.GetAll();
+        }
+
         public List<ChiTietSaleView> GetAllView()
         {
             // getall
