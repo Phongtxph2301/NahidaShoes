@@ -13,9 +13,9 @@ namespace C_GUI.QLForm
         {
             _iQLNsx = new QLNsx();
             InitializeComponent();
-            LoadData();
+            LoadData(_iQLNsx.GetAllView());
         }
-        public void LoadData()
+        public void LoadData(List<NsxView> nsxViews)
         {
             int stt = 1;
             dgrid_show.ColumnCount = 6;
@@ -26,7 +26,7 @@ namespace C_GUI.QLForm
             dgrid_show.Columns[4].Name = "dia chi";
             dgrid_show.Rows.Clear();
             dgrid_show.Columns[1].Visible = true;
-            foreach (NsxView a in _iQLNsx.GetAllView())
+            foreach (NsxView a in nsxViews)
             {
                 _ = dgrid_show.Rows.Add(stt++, a.Nsx.Id, a.Nsx.MaNsx, a.Nsx.TenNsx, a.Nsx.DiaChi);
             }
@@ -57,28 +57,48 @@ namespace C_GUI.QLForm
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            _ = _iQLNsx.Add(GetCtrlValues());
-            LoadData();
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                _ = _iQLNsx.Add(GetCtrlValues());
+                LoadData(_iQLNsx.GetAllView());
+            }
+
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            bool thongBao = _iQLNsx.Update(new A_DAL.Entities.Nsx() { Id = _ID, MaNsx = txt_ma.Texts, TenNsx = txt_ten.Texts, DiaChi = txt_diachi.Texts });
-            if (thongBao)
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                _ = MessageBox.Show("Sửa thành công");
-                LoadData();
+                bool thongBao = _iQLNsx.Update(new A_DAL.Entities.Nsx() { Id = _ID, MaNsx = txt_ma.Texts, TenNsx = txt_ten.Texts, DiaChi = txt_diachi.Texts });
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Sửa thành công");
+                    LoadData(_iQLNsx.GetAllView());
+                }
             }
+
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            bool thongBao = _iQLNsx.Delete(_iQLNsx.GetAll().Find(c => c.Id == _ID));
-            if (thongBao)
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                _ = MessageBox.Show("Xóa thành công");
-                LoadData();
+                bool thongBao = _iQLNsx.Delete(_iQLNsx.GetAll().Find(c => c.Id == _ID));
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Xóa thành công");
+                    LoadData(_iQLNsx.GetAllView());
+                }
             }
+
+        }
+
+        private void txt_timkiem__TextChanged(object sender, EventArgs e)
+        {
+            LoadData(_iQLNsx.GetAllView().Where(c => c.Nsx.TenNsx.ToLower().Contains(txt_timkiem.Texts.ToLower()) || c.Nsx.MaNsx.ToLower().Contains(txt_timkiem.Texts.ToLower())).ToList());
         }
     }
 }

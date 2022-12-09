@@ -35,6 +35,18 @@ namespace B_BUS.Services
             return igChieuCaoDeGiay.GetAll();
         }
 
+        public Guid IdChieuCaoDeGiay(ChieuCaoDeGiay obj)
+        {
+            ChieuCaoDeGiay x = new()
+            {
+                Id = Guid.NewGuid(),
+                MaKichCo = obj.MaKichCo,
+                KichCo = obj.KichCo,
+                TrangThai = obj.TrangThai
+            };
+            return igChieuCaoDeGiay.Add(x) ? x.Id : Guid.Empty;
+        }
+
         public ChieuCaoDeGiay? GetByMa(string? ma)
         {
             return igChieuCaoDeGiay.GetAll().Find(c => c.MaKichCo == ma);

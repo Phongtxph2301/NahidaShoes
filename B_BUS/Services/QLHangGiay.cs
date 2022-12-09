@@ -38,6 +38,18 @@ namespace B_BUS.Services
             return _iHangGiay.GetAll();
         }
 
+        public Guid IdHangGiay(HangGiay obj)
+        {
+            HangGiay x = new()
+            {
+                Id = Guid.NewGuid(),
+                MaHangGiay = obj.MaHangGiay,
+                TenHangGiay = obj.TenHangGiay,
+                TrangThai = obj.TrangThai
+            };
+            return _iHangGiay.Add(x) ? x.Id : Guid.Empty;
+        }
+
         public HangGiay? GetByMa(string? ma)
         {
             return _iHangGiay.GetAll().Find(c => c.MaHangGiay == ma);

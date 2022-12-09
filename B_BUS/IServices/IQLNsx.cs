@@ -9,6 +9,7 @@ namespace B_BUS.IServices
         bool Update(Nsx obj);
         bool Delete(Nsx obj);
         List<Nsx> GetAll();
+        Guid IdNsx(Nsx nsx);
         Nsx? GetByMa(string? ma);
         bool CheckMa(string ma);
         List<NsxView> GetAllView();

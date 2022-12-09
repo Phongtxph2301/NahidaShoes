@@ -10,6 +10,8 @@ namespace C_GUI.Views
         {
             InitializeComponent();
             _qlNhanVien = new QLNhanVien();
+            _tbxMaNhanVien.Texts = "NV1";
+            _tbxMatKhau.Texts = "00000";
         }
 
         private void _btnDangNhap_Click(object sender, EventArgs e)

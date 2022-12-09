@@ -7,5 +7,7 @@ namespace B_BUS.View_Models
         public ChiTietSale ChiTietSale { get; set; } = new();
         public Sale Sale { get; set; } = new();
         public ChiTietGiay ChiTietGiay { get; set; } = new();
+
+        public Giay Giay { get; set; } = new();
     }
 }

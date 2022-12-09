@@ -45,6 +45,19 @@ namespace B_BUS.Services
             return igSize.GetAll().Find(c => c.MaSize == ma);
         }
 
+        public Guid IdSize(Size obj)
+        {
+            Size x = new()
+            {
+                Id = Guid.NewGuid(),
+                MaSize = obj.MaSize,
+                TenSize = obj.TenSize,
+                SoSize = obj.SoSize,
+                TrangThai = obj.TrangThai
+            };
+            return igSize.Add(x) ? x.Id : Guid.Empty;
+        }
+
         public bool CheckMa(string ma)
         {//checkma
 

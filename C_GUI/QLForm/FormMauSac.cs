@@ -25,7 +25,7 @@ namespace C_GUI.QLForm
             dgrid_show.Columns[3].Name = "ten";
             dgrid_show.Columns[4].Name = "trang thai";
             dgrid_show.Rows.Clear();
-            dgrid_show.Columns[1].Visible = true;
+            dgrid_show.Columns[1].Visible = false;
             foreach (B_BUS.View_Models.MauSacView a in lstMausacView)
             {
                 _ = dgrid_show.Rows.Add(stt++, a.MauSac.Id, a.MauSac.MaMauSac, a.MauSac.TenMauSac, a.MauSac.TrangThai == 1 ? "hoat dong" : "khong hoat dong");
@@ -61,33 +61,48 @@ namespace C_GUI.QLForm
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            _ = _IQlMauSac.Add(GetvaluaContro());
-            LoadData(_IQlMauSac.GetAllView());
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                _ = _IQlMauSac.Add(GetvaluaContro());
+                LoadData(_IQlMauSac.GetAllView());
+            }
+
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            bool thongBao = _IQlMauSac.Update(new A_DAL.Entities.MauSac() { Id = _ID, MaMauSac = txt_ma.Texts, TenMauSac = txt_ten.Texts, TrangThai = rbtn_hoatdong.Checked == true ? 1 : 0 });
-            if (thongBao)
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                _ = MessageBox.Show("Sửa thành công");
-                LoadData(_IQlMauSac.GetAllView());
+                bool thongBao = _IQlMauSac.Update(new A_DAL.Entities.MauSac() { Id = _ID, MaMauSac = txt_ma.Texts, TenMauSac = txt_ten.Texts, TrangThai = rbtn_hoatdong.Checked == true ? 1 : 0 });
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Sửa thành công");
+                    LoadData(_IQlMauSac.GetAllView());
+                }
             }
+
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            bool thongBao = _IQlMauSac.Delete(_IQlMauSac.GetAll().Find(c => c.Id == _ID));
-            if (thongBao)
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                _ = MessageBox.Show("Xóa thành công");
-                LoadData(_IQlMauSac.GetAllView());
+                bool thongBao = _IQlMauSac.Delete(_IQlMauSac.GetAll().Find(c => c.Id == _ID));
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Xóa thành công");
+                    LoadData(_IQlMauSac.GetAllView());
+                }
             }
+
         }
 
         private void _tbxTimKiem__TextChanged(object sender, EventArgs e)
         {
-            LoadData(_IQlMauSac.GetAllView().Where(c => c.MauSac.TenMauSac.Contains(_tbxTimKiem.Texts)).ToList());
+            LoadData(_IQlMauSac.GetAllView().Where(c => c.MauSac.TenMauSac.ToLower().Contains(_tbxTimKiem.Texts.ToLower()) || c.MauSac.MaMauSac.ToLower().Contains(_tbxTimKiem.Texts.ToLower())).ToList());
         }
     }
 }

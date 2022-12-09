@@ -80,5 +80,10 @@ namespace C_GUI.QLForm
                 LoadData();
             }
         }
+
+        private void txt_timkiem__TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

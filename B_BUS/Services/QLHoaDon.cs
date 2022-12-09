@@ -59,12 +59,13 @@ namespace B_BUS.Services
             // getall
             List<HoaDonView> lst = (from a in igHoaDon.GetAll()
                                     join b in igNhanVien.GetAll() on a.IdNhanVien equals b.Id
-                                    join c in igKhachhang.GetAll() on a.IdKhachHang equals c.Id
+                                    join c in igKhachhang.GetAll() on a.IdKhachHang equals c.Id into gj
+                                    from x in gj.DefaultIfEmpty()
                                     select new HoaDonView()
                                     {
                                         HoaDon = a,
                                         NhanVien = b,
-                                        KhachHang = c
+                                        KhachHang = x ?? null
                                     }).ToList();
             return lst;
         }

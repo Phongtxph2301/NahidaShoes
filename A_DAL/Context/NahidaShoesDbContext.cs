@@ -10,7 +10,7 @@ namespace A_DAL.Context
             base.OnConfiguring(optionsBuilder);
             //Đổi connectionString để connect với co sở dữ liệu của mình
 
-            _ = optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=NahidaShoes;User ID=SA;Password=cuong191023;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            _ = optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=NahidaShos;User ID=SA;Password=cuong191023;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,6 +20,7 @@ namespace A_DAL.Context
             ///////////////////////////////
             _ = builder.Entity<ChiTietGiay>().HasKey(c => c.Id);
             _ = builder.Entity<ChiTietGiay>().Property(c => c.Id);
+            _ = builder.Entity<ChiTietGiay>().Property(c => c.Anh).HasColumnType("image");
             _ = builder.Entity<ChiTietGiay>().HasIndex(c => new { c.IdMauSac, c.IdSize, c.IdNsx, c.IdHangGiay, c.IdChieuCaoDeGiay, c.IdGiay }).IsUnique(true);
             ///////////////////////////////
             _ = builder.Entity<ChiTietSale>().HasKey(c => c.Id);

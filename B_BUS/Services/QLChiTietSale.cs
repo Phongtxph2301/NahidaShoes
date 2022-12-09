@@ -12,12 +12,14 @@ namespace B_BUS.Services
         public IGenericRepository<ChiTietSale> _igchitietsale;
         public IGenericRepository<Sale> _igsale;
         public IGenericRepository<ChiTietGiay> igchiTietGiay;
+        public IGenericRepository<Giay> iGiay;
 
         public QLChiTietSale()
         {
             _igchitietsale = new GenericRepository<ChiTietSale>();
             _igsale = new GenericRepository<Sale>();
             igchiTietGiay = new GenericRepository<ChiTietGiay>();
+            iGiay = new GenericRepository<Giay>();
         }
         public bool Add(ChiTietSale obj)
         {
@@ -48,11 +50,13 @@ namespace B_BUS.Services
             List<ChiTietSaleView> lst = (from a in _igchitietsale.GetAll()
                                          join b in _igsale.GetAll() on a.IdSale equals b.Id
                                          join c in igchiTietGiay.GetAll() on a.IdChiTietGiay equals c.Id
+                                         join d in iGiay.GetAll() on c.IdGiay equals d.Id
                                          select new ChiTietSaleView()
                                          {
                                              ChiTietSale = a,
                                              Sale = b,
-                                             ChiTietGiay = c
+                                             ChiTietGiay = c,
+                                             Giay = d,
 
                                          }).ToList();
             return lst;

@@ -279,5 +279,11 @@ namespace C_GUI.Views
         {
             Program.Login.Close();
         }
+
+        private void iconButton10_Click(object sender, EventArgs e)
+        {
+            OpenChildForms(new FormSale(), sender);
+            Hidesubmenu();
+        }
     }
 }

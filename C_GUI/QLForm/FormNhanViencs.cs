@@ -19,24 +19,24 @@ namespace C_GUI.QLForm
             InitializeComponent();
             LoadcmbChucVu();
             LoadcmbCuaHang();
-            LoadData();
+            LoadData(_IQlNhanVien.GetAllView());
         }
         public void LoadcmbChucVu()
         {
-            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
+            foreach (ChucVu a in _IQlChucVu.GetAll())
             {
-                _ = cmb_chucvu.Items.Add(a.ChucVu.TenChucVu);
+                _ = cmb_chucvu.Items.Add(a.TenChucVu);
             }
         }
         public void LoadcmbCuaHang()
         {
 
-            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
+            foreach (CuaHang a in _IQlCuaHang.GetAll())
             {
-                _ = cmb_cuahang.Items.Add(a.CuaHang.TenCuaHang);
+                _ = cmb_cuahang.Items.Add(a.TenCuaHang);
             }
         }
-        public void LoadData()
+        public void LoadData(List<NhanVienView> nhanVienViews)
         {
             int stt = 1;
             dgrid_shownhanvien.ColumnCount = 13;
@@ -55,7 +55,7 @@ namespace C_GUI.QLForm
             dgrid_shownhanvien.Columns[12].Name = "trang thai";
             dgrid_shownhanvien.Rows.Clear();
             dgrid_shownhanvien.Columns[1].Visible = true;
-            foreach (NhanVienView a in _IQlNhanVien.GetAllView())
+            foreach (NhanVienView a in nhanVienViews)
             {
 
                 _ = dgrid_shownhanvien.Rows.Add(stt++, a.NhanVien.Id, a.NhanVien.MaNhanVien, a.NhanVien.TenNhanVien, a.NhanVien.Email, a.NhanVien.GioiTinh == 1 ? "nam" : "nu", a.NhanVien.NgaySinh, a.NhanVien.Sdt, a.NhanVien.DiaChi, a.NhanVien.MatKhau, a.ChucVu.TenChucVu, a.CuaHang.TenCuaHang, a.NhanVien.TrangThai == 1 ? "hoạt động" : "Không hoạt động");
@@ -138,45 +138,65 @@ namespace C_GUI.QLForm
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            _ = _IQlNhanVien.Add(GetvaluaContro());
-            LoadData();
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                _ = _IQlNhanVien.Add(GetvaluaContro());
+                LoadData(_IQlNhanVien.GetAllView());
+            }
+
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            ChucVuView? x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ChucVuView? x = _IQlChucVu.GetAllView().FirstOrDefault(c => c.ChucVu.TenChucVu == cmb_chucvu.Texts);
 
-            CuaHangView? y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
-            bool thongBao = _IQlNhanVien.Update(new A_DAL.Entities.NhanVien()
-            {
-                Id = _ID,
-                MaNhanVien = txt_ma.Texts,
-                TenNhanVien = txt_ten.Texts,
-                Email = txt_email.Texts,
-                NgaySinh = dtt_ngaysinh.Value,
-                GioiTinh = rbtn_nam.Checked == true ? 1 : 0,
-                Sdt = txt_sdt.Texts,
-                DiaChi = txt_diachi.Texts,
-                MatKhau = txt_matkhau.Texts,
-                TrangThai = cbx_hoatdong.Checked == true ? 1 : 0,
-                IdChucVu = x.ChucVu.Id,
-                IdCuaHang = y.CuaHang.Id,
-            });
-            if (thongBao)
-            {
-                _ = MessageBox.Show("Sửa thành công");
-                LoadData();
+                CuaHangView? y = _IQlCuaHang.GetAllView().FirstOrDefault(c => c.CuaHang.TenCuaHang == cmb_cuahang.Texts);
+                bool thongBao = _IQlNhanVien.Update(new A_DAL.Entities.NhanVien()
+                {
+                    Id = _ID,
+                    MaNhanVien = txt_ma.Texts,
+                    TenNhanVien = txt_ten.Texts,
+                    Email = txt_email.Texts,
+                    NgaySinh = dtt_ngaysinh.Value,
+                    GioiTinh = rbtn_nam.Checked == true ? 1 : 0,
+                    Sdt = txt_sdt.Texts,
+                    DiaChi = txt_diachi.Texts,
+                    MatKhau = txt_matkhau.Texts,
+                    TrangThai = cbx_hoatdong.Checked == true ? 1 : 0,
+                    IdChucVu = x.ChucVu.Id,
+                    IdCuaHang = y.CuaHang.Id,
+                });
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Sửa thành công");
+                    LoadData(_IQlNhanVien.GetAllView());
+                }
             }
+
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            bool thongBao = _IQlNhanVien.Delete(_IQlNhanVien.GetAll().Find(c => c.Id == _ID));
-            if (thongBao)
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                _ = MessageBox.Show("Xóa thành công");
-                LoadData();
+                bool thongBao = _IQlNhanVien.Delete(_IQlNhanVien.GetAll().Find(c => c.Id == _ID));
+                if (thongBao)
+                {
+                    _ = MessageBox.Show("Xóa thành công");
+                    LoadData(_IQlNhanVien.GetAllView());
+                }
             }
+
+        }
+
+        private void txt_timkiem__TextChanged(object sender, EventArgs e)
+        {
+            LoadData(_IQlNhanVien.GetAllView().Where(c => c.NhanVien.TenNhanVien.ToLower().Contains(txt_timkiem.Texts.ToLower()) || c.NhanVien.MaNhanVien.ToLower().Contains(txt_timkiem.Texts.ToLower())).ToList());
         }
     }
 }
