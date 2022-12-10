@@ -46,23 +46,25 @@
             this.MoTa = new System.Windows.Forms.ColumnHeader();
             this.Id = new System.Windows.Forms.ColumnHeader();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this._cbxCheDoXemGioHang = new C_GUI.RJControls.RJComboBox();
             this._cbxTimKiemGioHang = new C_GUI.RJControls.RJComboBox();
             this._lsvGioHang = new System.Windows.Forms.ListView();
-            this._Id = new System.Windows.Forms.ColumnHeader();
             this._TenGiay = new System.Windows.Forms.ColumnHeader();
             this._DonGia = new System.Windows.Forms.ColumnHeader();
             this._SoLuong = new System.Windows.Forms.ColumnHeader();
             this._ThanhTien = new System.Windows.Forms.ColumnHeader();
+            this._Id = new System.Windows.Forms.ColumnHeader();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this._cbxCheDoXemHoaDon = new C_GUI.RJControls.RJComboBox();
             this._tbxKhachHnag = new C_GUI.RJControls.RJTextBox();
             this._cbxTimKiemHoaDon = new C_GUI.RJControls.RJComboBox();
             this._lsvHoaDon = new System.Windows.Forms.ListView();
-            this.IdHoaDon = new System.Windows.Forms.ColumnHeader();
             this.MaHoaDon = new System.Windows.Forms.ColumnHeader();
             this.PhuongThuaMua = new System.Windows.Forms.ColumnHeader();
             this.TrangThai = new System.Windows.Forms.ColumnHeader();
             this.MoTaHoaDon = new System.Windows.Forms.ColumnHeader();
             this.SoCMND = new System.Windows.Forms.ColumnHeader();
+            this.IdHoaDon = new System.Windows.Forms.ColumnHeader();
             this.label2 = new System.Windows.Forms.Label();
             this._btnTaoHoaDon = new C_GUI.RJControls.RJButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -98,6 +100,11 @@
             this._cbxPhuongThucMua = new C_GUI.RJControls.RJComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this._btnThanhToan = new C_GUI.RJControls.RJButton();
+            this._tbxDonGia = new C_GUI.RJControls.RJTextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this._tbxSoLuong = new C_GUI.RJControls.RJTextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this._btnSuaChiTietHoaDon = new C_GUI.RJControls.RJButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -116,7 +123,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1246, 534);
+            this.groupBox1.Size = new System.Drawing.Size(1246, 434);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin Sản Phẩm";
@@ -252,7 +259,7 @@
             this._lsvShowSanPham.Location = new System.Drawing.Point(5, 59);
             this._lsvShowSanPham.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._lsvShowSanPham.Name = "_lsvShowSanPham";
-            this._lsvShowSanPham.Size = new System.Drawing.Size(1231, 471);
+            this._lsvShowSanPham.Size = new System.Drawing.Size(1231, 375);
             this._lsvShowSanPham.TabIndex = 1;
             this._lsvShowSanPham.UseCompatibleStateImageBehavior = false;
             this._lsvShowSanPham.View = System.Windows.Forms.View.Tile;
@@ -320,16 +327,43 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this._cbxCheDoXemGioHang);
             this.groupBox2.Controls.Add(this._cbxTimKiemGioHang);
             this.groupBox2.Controls.Add(this._lsvGioHang);
-            this.groupBox2.Location = new System.Drawing.Point(12, 549);
+            this.groupBox2.Location = new System.Drawing.Point(12, 453);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(498, 364);
+            this.groupBox2.Size = new System.Drawing.Size(498, 415);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Giỏ Hàng";
+            // 
+            // _cbxCheDoXemGioHang
+            // 
+            this._cbxCheDoXemGioHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this._cbxCheDoXemGioHang.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this._cbxCheDoXemGioHang.BorderSize = 1;
+            this._cbxCheDoXemGioHang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this._cbxCheDoXemGioHang.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._cbxCheDoXemGioHang.ForeColor = System.Drawing.Color.DimGray;
+            this._cbxCheDoXemGioHang.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this._cbxCheDoXemGioHang.Items.AddRange(new object[] {
+            "Tile",
+            "List",
+            "SmallIcon",
+            "Details",
+            "LargeIcon"});
+            this._cbxCheDoXemGioHang.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this._cbxCheDoXemGioHang.ListTextColor = System.Drawing.Color.DimGray;
+            this._cbxCheDoXemGioHang.Location = new System.Drawing.Point(233, 21);
+            this._cbxCheDoXemGioHang.MinimumSize = new System.Drawing.Size(200, 30);
+            this._cbxCheDoXemGioHang.Name = "_cbxCheDoXemGioHang";
+            this._cbxCheDoXemGioHang.Padding = new System.Windows.Forms.Padding(1);
+            this._cbxCheDoXemGioHang.Size = new System.Drawing.Size(259, 30);
+            this._cbxCheDoXemGioHang.TabIndex = 59;
+            this._cbxCheDoXemGioHang.Texts = "";
+            this._cbxCheDoXemGioHang.OnSelectedIndexChanged += new System.EventHandler(this._cbxCheDoXemGioHang_OnSelectedIndexChanged);
             // 
             // _cbxTimKiemGioHang
             // 
@@ -348,7 +382,7 @@
             this._cbxTimKiemGioHang.MinimumSize = new System.Drawing.Size(200, 30);
             this._cbxTimKiemGioHang.Name = "_cbxTimKiemGioHang";
             this._cbxTimKiemGioHang.Padding = new System.Windows.Forms.Padding(1);
-            this._cbxTimKiemGioHang.Size = new System.Drawing.Size(486, 30);
+            this._cbxTimKiemGioHang.Size = new System.Drawing.Size(221, 30);
             this._cbxTimKiemGioHang.TabIndex = 6;
             this._cbxTimKiemGioHang.Texts = "";
             this._cbxTimKiemGioHang.OnSelectedIndexChanged += new System.EventHandler(this._cbxTimKiemGioHang_OnSelectedIndexChanged);
@@ -357,26 +391,22 @@
             // 
             this._lsvGioHang.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this._lsvGioHang.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this._Id,
             this._TenGiay,
             this._DonGia,
             this._SoLuong,
-            this._ThanhTien});
+            this._ThanhTien,
+            this._Id});
             this._lsvGioHang.FullRowSelect = true;
             this._lsvGioHang.Location = new System.Drawing.Point(5, 56);
             this._lsvGioHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._lsvGioHang.Name = "_lsvGioHang";
-            this._lsvGioHang.Size = new System.Drawing.Size(493, 304);
+            this._lsvGioHang.Size = new System.Drawing.Size(493, 359);
             this._lsvGioHang.TabIndex = 0;
             this._lsvGioHang.UseCompatibleStateImageBehavior = false;
             this._lsvGioHang.View = System.Windows.Forms.View.Details;
             this._lsvGioHang.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this._lsvGioHang_ColumnClick);
+            this._lsvGioHang.SelectedIndexChanged += new System.EventHandler(this._lsvGioHang_SelectedIndexChanged);
             this._lsvGioHang.DoubleClick += new System.EventHandler(this._lsvGioHang_DoubleClick);
-            // 
-            // _Id
-            // 
-            this._Id.Text = "Id";
-            this._Id.Width = 0;
             // 
             // _TenGiay
             // 
@@ -402,19 +432,51 @@
             this._ThanhTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this._ThanhTien.Width = 150;
             // 
+            // _Id
+            // 
+            this._Id.Text = "Id";
+            this._Id.Width = 0;
+            // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this._cbxCheDoXemHoaDon);
             this.groupBox4.Controls.Add(this._tbxKhachHnag);
             this.groupBox4.Controls.Add(this._cbxTimKiemHoaDon);
             this.groupBox4.Controls.Add(this._lsvHoaDon);
-            this.groupBox4.Location = new System.Drawing.Point(516, 549);
+            this.groupBox4.Location = new System.Drawing.Point(516, 453);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox4.Size = new System.Drawing.Size(742, 364);
+            this.groupBox4.Size = new System.Drawing.Size(742, 460);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Hóa Đơn";
+            // 
+            // _cbxCheDoXemHoaDon
+            // 
+            this._cbxCheDoXemHoaDon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this._cbxCheDoXemHoaDon.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this._cbxCheDoXemHoaDon.BorderSize = 1;
+            this._cbxCheDoXemHoaDon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this._cbxCheDoXemHoaDon.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._cbxCheDoXemHoaDon.ForeColor = System.Drawing.Color.DimGray;
+            this._cbxCheDoXemHoaDon.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this._cbxCheDoXemHoaDon.Items.AddRange(new object[] {
+            "Tile",
+            "List",
+            "SmallIcon",
+            "Details",
+            "LargeIcon"});
+            this._cbxCheDoXemHoaDon.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(228)))), ((int)(((byte)(245)))));
+            this._cbxCheDoXemHoaDon.ListTextColor = System.Drawing.Color.DimGray;
+            this._cbxCheDoXemHoaDon.Location = new System.Drawing.Point(230, 21);
+            this._cbxCheDoXemHoaDon.MinimumSize = new System.Drawing.Size(200, 30);
+            this._cbxCheDoXemHoaDon.Name = "_cbxCheDoXemHoaDon";
+            this._cbxCheDoXemHoaDon.Padding = new System.Windows.Forms.Padding(1);
+            this._cbxCheDoXemHoaDon.Size = new System.Drawing.Size(214, 30);
+            this._cbxCheDoXemHoaDon.TabIndex = 60;
+            this._cbxCheDoXemHoaDon.Texts = "";
+            this._cbxCheDoXemHoaDon.OnSelectedIndexChanged += new System.EventHandler(this._cbxCheDoXemHoaDon_OnSelectedIndexChanged);
             // 
             // _tbxKhachHnag
             // 
@@ -461,7 +523,7 @@
             this._cbxTimKiemHoaDon.MinimumSize = new System.Drawing.Size(200, 30);
             this._cbxTimKiemHoaDon.Name = "_cbxTimKiemHoaDon";
             this._cbxTimKiemHoaDon.Padding = new System.Windows.Forms.Padding(1);
-            this._cbxTimKiemHoaDon.Size = new System.Drawing.Size(438, 30);
+            this._cbxTimKiemHoaDon.Size = new System.Drawing.Size(218, 30);
             this._cbxTimKiemHoaDon.TabIndex = 7;
             this._cbxTimKiemHoaDon.Texts = "";
             this._cbxTimKiemHoaDon.OnSelectedIndexChanged += new System.EventHandler(this._cbxTimKiemHoaDon_OnSelectedIndexChanged);
@@ -470,27 +532,22 @@
             // 
             this._lsvHoaDon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this._lsvHoaDon.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.IdHoaDon,
             this.MaHoaDon,
             this.PhuongThuaMua,
             this.TrangThai,
             this.MoTaHoaDon,
-            this.SoCMND});
+            this.SoCMND,
+            this.IdHoaDon});
             this._lsvHoaDon.FullRowSelect = true;
             this._lsvHoaDon.Location = new System.Drawing.Point(6, 56);
             this._lsvHoaDon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._lsvHoaDon.Name = "_lsvHoaDon";
-            this._lsvHoaDon.Size = new System.Drawing.Size(726, 304);
+            this._lsvHoaDon.Size = new System.Drawing.Size(726, 400);
             this._lsvHoaDon.TabIndex = 2;
             this._lsvHoaDon.UseCompatibleStateImageBehavior = false;
             this._lsvHoaDon.View = System.Windows.Forms.View.Details;
             this._lsvHoaDon.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this._lsvHoaDon_ColumnClick);
             this._lsvHoaDon.DoubleClick += new System.EventHandler(this._lsvHoaDon_DoubleClick);
-            // 
-            // IdHoaDon
-            // 
-            this.IdHoaDon.Text = "Id";
-            this.IdHoaDon.Width = 0;
             // 
             // MaHoaDon
             // 
@@ -521,6 +578,11 @@
             this.SoCMND.Text = "Khách hàng";
             this.SoCMND.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SoCMND.Width = 125;
+            // 
+            // IdHoaDon
+            // 
+            this.IdHoaDon.Text = "Id";
+            this.IdHoaDon.Width = 0;
             // 
             // label2
             // 
@@ -804,7 +866,7 @@
             this._dtpNgaySinh.BorderSize = 2;
             this._dtpNgaySinh.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._dtpNgaySinh.Location = new System.Drawing.Point(167, 64);
-            this._dtpNgaySinh.MinimumSize = new System.Drawing.Size(0, 35);
+            this._dtpNgaySinh.MinimumSize = new System.Drawing.Size(4, 35);
             this._dtpNgaySinh.Name = "_dtpNgaySinh";
             this._dtpNgaySinh.Size = new System.Drawing.Size(236, 35);
             this._dtpNgaySinh.SkinColor = System.Drawing.Color.MediumSlateBlue;
@@ -1142,16 +1204,108 @@
             this._btnThanhToan.UseVisualStyleBackColor = false;
             this._btnThanhToan.Click += new System.EventHandler(this._btnThanhToan_Click);
             // 
+            // _tbxDonGia
+            // 
+            this._tbxDonGia.BackColor = System.Drawing.SystemColors.Window;
+            this._tbxDonGia.BorderColor = System.Drawing.Color.Black;
+            this._tbxDonGia.BorderFocusColor = System.Drawing.Color.Red;
+            this._tbxDonGia.BorderRadius = 15;
+            this._tbxDonGia.BorderSize = 2;
+            this._tbxDonGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._tbxDonGia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this._tbxDonGia.Location = new System.Drawing.Point(99, 874);
+            this._tbxDonGia.Margin = new System.Windows.Forms.Padding(4);
+            this._tbxDonGia.MaxLength = 20;
+            this._tbxDonGia.Multiline = false;
+            this._tbxDonGia.Name = "_tbxDonGia";
+            this._tbxDonGia.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this._tbxDonGia.PasswordChar = false;
+            this._tbxDonGia.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this._tbxDonGia.PlaceholderText = "";
+            this._tbxDonGia.Size = new System.Drawing.Size(119, 31);
+            this._tbxDonGia.TabIndex = 73;
+            this._tbxDonGia.Texts = "";
+            this._tbxDonGia.UnderlinedStyle = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(17, 874);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 21);
+            this.label16.TabIndex = 72;
+            this.label16.Text = "Đơn giá";
+            // 
+            // _tbxSoLuong
+            // 
+            this._tbxSoLuong.BackColor = System.Drawing.SystemColors.Window;
+            this._tbxSoLuong.BorderColor = System.Drawing.Color.Black;
+            this._tbxSoLuong.BorderFocusColor = System.Drawing.Color.Red;
+            this._tbxSoLuong.BorderRadius = 15;
+            this._tbxSoLuong.BorderSize = 2;
+            this._tbxSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._tbxSoLuong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this._tbxSoLuong.Location = new System.Drawing.Point(305, 874);
+            this._tbxSoLuong.Margin = new System.Windows.Forms.Padding(4);
+            this._tbxSoLuong.MaxLength = 20;
+            this._tbxSoLuong.Multiline = false;
+            this._tbxSoLuong.Name = "_tbxSoLuong";
+            this._tbxSoLuong.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this._tbxSoLuong.PasswordChar = false;
+            this._tbxSoLuong.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this._tbxSoLuong.PlaceholderText = "";
+            this._tbxSoLuong.Size = new System.Drawing.Size(100, 31);
+            this._tbxSoLuong.TabIndex = 75;
+            this._tbxSoLuong.Texts = "";
+            this._tbxSoLuong.UnderlinedStyle = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(225, 874);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 21);
+            this.label17.TabIndex = 74;
+            this.label17.Text = "Số lượng";
+            // 
+            // _btnSuaChiTietHoaDon
+            // 
+            this._btnSuaChiTietHoaDon.BackColor = System.Drawing.Color.Turquoise;
+            this._btnSuaChiTietHoaDon.BackgroundColor = System.Drawing.Color.Turquoise;
+            this._btnSuaChiTietHoaDon.BorderColor = System.Drawing.Color.Black;
+            this._btnSuaChiTietHoaDon.BorderRadius = 15;
+            this._btnSuaChiTietHoaDon.BorderSize = 2;
+            this._btnSuaChiTietHoaDon.FlatAppearance.BorderSize = 0;
+            this._btnSuaChiTietHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._btnSuaChiTietHoaDon.ForeColor = System.Drawing.Color.Black;
+            this._btnSuaChiTietHoaDon.Location = new System.Drawing.Point(412, 874);
+            this._btnSuaChiTietHoaDon.Name = "_btnSuaChiTietHoaDon";
+            this._btnSuaChiTietHoaDon.Size = new System.Drawing.Size(98, 31);
+            this._btnSuaChiTietHoaDon.SizeImage = new System.Drawing.Size(20, 20);
+            this._btnSuaChiTietHoaDon.TabIndex = 76;
+            this._btnSuaChiTietHoaDon.Text = "Sửa";
+            this._btnSuaChiTietHoaDon.TextColor = System.Drawing.Color.Black;
+            this._btnSuaChiTietHoaDon.UseVisualStyleBackColor = false;
+            this._btnSuaChiTietHoaDon.Click += new System.EventHandler(this._btnSuaChiTietHoaDon_Click);
+            // 
             // FormBanHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(1685, 924);
+            this.Controls.Add(this._btnSuaChiTietHoaDon);
+            this.Controls.Add(this._tbxSoLuong);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this._tbxDonGia);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormBanHang";
             this.Text = "FormBanHang";
@@ -1161,6 +1315,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1236,5 +1391,12 @@
         private RJControls.RJComboBox _cbxCheDoXem;
         private RJControls.RJComboBox _cbxPhuongThucThanhToan;
         private Label label15;
+        private RJControls.RJComboBox _cbxCheDoXemGioHang;
+        private RJControls.RJComboBox _cbxCheDoXemHoaDon;
+        private RJControls.RJTextBox _tbxDonGia;
+        private Label label16;
+        private RJControls.RJTextBox _tbxSoLuong;
+        private Label label17;
+        private RJControls.RJButton _btnSuaChiTietHoaDon;
     }
 }

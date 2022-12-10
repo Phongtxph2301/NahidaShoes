@@ -83,6 +83,26 @@ namespace C_GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cart_empty {
+            get {
+                object obj = ResourceManager.GetObject("cart-empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ch__m_c {
+            get {
+                object obj = ResourceManager.GetObject("ch_ m_c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Picsart_22_11_11_01_37_22_243 {
             get {
                 object obj = ResourceManager.GetObject("Picsart_22-11-11_01-37-22-243", resourceCulture);
