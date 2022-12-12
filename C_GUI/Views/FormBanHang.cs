@@ -314,7 +314,7 @@ namespace C_GUI.Views
                                     soTienGiam += sale.SoTiemGiamGia;
                                 }
                             }
-                            float donGia = (chiTietGiay.GiaBan * (100 - phanTramGiam)/100) - soTienGiam;
+                            float donGia = (chiTietGiay.GiaBan * (100 - phanTramGiam) / 100) - soTienGiam;
                             if (donGia < 0)
                             {
                                 donGia = 0;
@@ -441,6 +441,7 @@ namespace C_GUI.Views
                             hoaDon.ThoiGianThanhToan = DateTime.Now;
                             hoaDon.GiamGia = Convert.ToSingle(_tbxGiamGia.Texts.Trim());
                             hoaDon.GhiChu = _tbxGhiChu.Texts.Trim();
+                            hoaDon.TongSoTien = Convert.ToSingle(_tbxTongTien.Texts.Trim());
                             _ = _qlHoaDon.Update(hoaDon);
                             _ = MessageBox.Show("Thanh toán thành công");
                             LoadHoaDon(_qlHoaDon.GetAllView().ToList());

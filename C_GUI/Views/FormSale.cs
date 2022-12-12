@@ -42,25 +42,25 @@ namespace C_GUI.QLForm
                 cmb_hanggiay.Items.Clear();
                 cmb_mausac.Items.Clear();
 
-                cmb_giay.Items.Add("Tất cả tên giày");
-                cmb_hanggiay.Items.Add("Tất cả hãng giày");
-                cmb_mausac.Items.Add("Tất cả màu sắc");
+                _ = cmb_giay.Items.Add("Tất cả tên giày");
+                _ = cmb_hanggiay.Items.Add("Tất cả hãng giày");
+                _ = cmb_mausac.Items.Add("Tất cả màu sắc");
 
-                foreach (var a in _IQlSale.GetAll())
+                foreach (Sale a in _IQlSale.GetAll())
                 {
                     _ = cmb_sale.Items.Add(a.TenChuongTrinh);
                 }
 
-                foreach (var a in _IQlGiay.GetAll())
+                foreach (Giay a in _IQlGiay.GetAll())
                 {
                     _ = cmb_giay.Items.Add(a.TenGiay);
                 }
-                foreach (var a in _IQlHangGiay.GetAll())
+                foreach (HangGiay a in _IQlHangGiay.GetAll())
                 {
                     _ = cmb_hanggiay.Items.Add(a.TenHangGiay);
                 }
 
-                foreach (var a in _IQlMauSac.GetAll())
+                foreach (MauSac a in _IQlMauSac.GetAll())
                 {
                     _ = cmb_mausac.Items.Add(a.TenMauSac);
                 }
@@ -70,11 +70,11 @@ namespace C_GUI.QLForm
                 cmb_mausac.SelectedIndex = 0;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("hãy kiểm tra lại Cmb");
+                _ = MessageBox.Show("hãy kiểm tra lại Cmb");
             }
-           
+
 
 
 
@@ -182,14 +182,14 @@ namespace C_GUI.QLForm
 
             try
             {
-                if (dtp_ngaybatdau.Value < (DateTime.Today) || dtp_ngayketthuc.Value < dtp_ngaybatdau.Value)
+                if (dtp_ngaybatdau.Value < DateTime.Today || dtp_ngayketthuc.Value < dtp_ngaybatdau.Value)
                 {
                     _ = MessageBox.Show("Kiểm tra lại lịch");
                     return;
                 }
 
 
-                if (int.Parse(txt_ptgiam.Texts) < 0 || int.Parse(txt_ptgiam.Texts) > 100)
+                if (int.Parse(txt_ptgiam.Texts) is < 0 or > 100)
                 {
                     _ = MessageBox.Show("Kiểm tra lại số %");
                     return;
@@ -212,11 +212,11 @@ namespace C_GUI.QLForm
 
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show("Đã tồn tại hãy kiểm tra lại");
+                _ = MessageBox.Show("Đã tồn tại hãy kiểm tra lại");
             }
-           
+
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
@@ -228,7 +228,7 @@ namespace C_GUI.QLForm
                     _ = MessageBox.Show("Kiểm tra lại lịch");
                     return;
                 }
-                if (int.Parse(txt_ptgiam.Texts) < 0 || int.Parse(txt_ptgiam.Texts) > 100)
+                if (int.Parse(txt_ptgiam.Texts) is < 0 or > 100)
                 {
                     _ = MessageBox.Show("Kiểm tra lại số %");
                     return;
@@ -247,11 +247,11 @@ namespace C_GUI.QLForm
                     }
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
@@ -272,11 +272,11 @@ namespace C_GUI.QLForm
                     }
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void dgrid_show_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -292,11 +292,11 @@ namespace C_GUI.QLForm
                 dtp_ngaybatdau.Value = DateTime.Parse(dgrid_show.Rows[index].Cells[6].Value.ToString());
                 dtp_ngayketthuc.Value = DateTime.Parse(dgrid_show.Rows[index].Cells[7].Value.ToString());
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-            
+
 
         }
 
@@ -306,7 +306,7 @@ namespace C_GUI.QLForm
         }
         public List<ChiTietSale> GetvaluaControSALE()
         {
-          
+
             List<ChiTietSale> chiTietSales;
             chiTietSales = new List<ChiTietSale>();
             SaleView? x = _IQlSale.GetAllView().FirstOrDefault(c => c.Sale.TenChuongTrinh == cmb_sale.Texts);
@@ -794,9 +794,9 @@ namespace C_GUI.QLForm
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm", "Thông báo", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        foreach (var a in GetvaluaControSALE())
+                        foreach (ChiTietSale a in GetvaluaControSALE())
                         {
-                            _IQlChiTietSale.Add(a);
+                            _ = _IQlChiTietSale.Add(a);
                         }
                         LoadDataSP();
 
@@ -808,12 +808,12 @@ namespace C_GUI.QLForm
                     return;
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show("Đã tồn tại hãy kiểm tra lại");
+                _ = MessageBox.Show("Đã tồn tại hãy kiểm tra lại");
             }
-           
-          
+
+
         }
 
 
@@ -833,63 +833,63 @@ namespace C_GUI.QLForm
                     }
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
 
 
-       
+
 
         private void btn_giay_Click(object sender, EventArgs e)
         {
             try
             {
-                FormGiay formGiay = new FormGiay();
+                FormGiay formGiay = new();
                 formGiay.Show();
                 Loadcmb();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-            
+
         }
 
         private void btn_hanggiay_Click(object sender, EventArgs e)
         {
             try
             {
-                FormHangGiay formHangGiayGiay = new FormHangGiay();
+                FormHangGiay formHangGiayGiay = new();
                 formHangGiayGiay.Show();
                 Loadcmb();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void btn_mausac_Click(object sender, EventArgs e)
         {
             try
             {
-                FormMauSac formMauSac = new FormMauSac();
+                FormMauSac formMauSac = new();
                 formMauSac.Show();
                 Loadcmb();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-            
+
         }
 
-       
+
 
 
 
@@ -899,11 +899,11 @@ namespace C_GUI.QLForm
             {
                 LocChiTietGiay();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void rjButton1_Click(object sender, EventArgs e)
@@ -915,11 +915,11 @@ namespace C_GUI.QLForm
                 cmb_mausac.SelectedIndex = 0;
                 LoadDataSP2(_IQlChiTietGiay.GetAllView());
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void cmb_hanggiay_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -928,14 +928,14 @@ namespace C_GUI.QLForm
             {
                 LocChiTietGiay();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
-     
+
 
         private void cmb_mausac_OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -943,11 +943,11 @@ namespace C_GUI.QLForm
             {
                 LocChiTietGiay();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
 
@@ -960,28 +960,28 @@ namespace C_GUI.QLForm
                     return;
                 }
                 List<ChiTietGiayView> lstChiTietGiayView = _IQlChiTietGiay.GetAllView().Where(c => c.ChiTietGiay.SoLuongTon > 0).ToList();
-                string tenGiay = cmb_giay.SelectedItem == "Tất cả tên giày" ? "-1" : cmb_giay.SelectedItem.ToString();
+                string? tenGiay = cmb_giay.SelectedItem == "Tất cả tên giày" ? "-1" : cmb_giay.SelectedItem.ToString();
                 if (tenGiay != "-1")
                 {
                     lstChiTietGiayView = lstChiTietGiayView.Where(c => c.Giay.TenGiay == tenGiay).ToList();
                 }
-                string tenMauSac = cmb_mausac.SelectedItem == "Tất cả màu sắc" ? "-1" : cmb_mausac.SelectedItem.ToString();
+                string? tenMauSac = cmb_mausac.SelectedItem == "Tất cả màu sắc" ? "-1" : cmb_mausac.SelectedItem.ToString();
                 if (tenMauSac != "-1")
                 {
                     lstChiTietGiayView = lstChiTietGiayView.Where(c => c.MauSac.TenMauSac == tenMauSac).ToList();
                 }
-                string tenHangGiay = cmb_hanggiay.SelectedItem == "Tất cả hãng giày" ? "-1" : cmb_hanggiay.SelectedItem.ToString();
+                string? tenHangGiay = cmb_hanggiay.SelectedItem == "Tất cả hãng giày" ? "-1" : cmb_hanggiay.SelectedItem.ToString();
                 if (tenHangGiay != "-1")
                 {
                     lstChiTietGiayView = lstChiTietGiayView.Where(c => c.HangGiay.TenHangGiay == tenHangGiay).ToList();
                 }
                 LoadDataSP2(lstChiTietGiayView);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
 
         private void dgrid_showsanpham_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -990,18 +990,18 @@ namespace C_GUI.QLForm
             {
                 int index = e.RowIndex;
                 _ID = Guid.Parse(dgrid_showsanpham.Rows[index].Cells[11].Value.ToString());
-                var a = _IQlChiTietSale.GetAllView().FirstOrDefault(c => c.ChiTietSale.Id == _ID);
-                var b = _IQlChiTietGiay.GetAllView().FirstOrDefault(c => c.ChiTietGiay.Id == a.ChiTietGiay.Id);
+                ChiTietSaleView? a = _IQlChiTietSale.GetAllView().FirstOrDefault(c => c.ChiTietSale.Id == _ID);
+                ChiTietGiayView? b = _IQlChiTietGiay.GetAllView().FirstOrDefault(c => c.ChiTietGiay.Id == a.ChiTietGiay.Id);
                 cmb_sale.SelectedItem = _IQlChiTietSale.GetAllView().FirstOrDefault(c => c.ChiTietSale.IdSale == a.ChiTietSale.IdSale).Sale.TenChuongTrinh;
                 cmb_giay.SelectedItem = _IQlChiTietGiay.GetAllView().FirstOrDefault(c => c.ChiTietGiay.Id == b.ChiTietGiay.Id).Giay.TenGiay;
                 cmb_hanggiay.SelectedItem = _IQlChiTietGiay.GetAllView().FirstOrDefault(c => c.ChiTietGiay.Id == b.ChiTietGiay.Id).HangGiay.TenHangGiay;
                 cmb_mausac.SelectedItem = _IQlChiTietGiay.GetAllView().FirstOrDefault(c => c.ChiTietGiay.Id == b.ChiTietGiay.Id).MauSac.TenMauSac;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show(" hãy kiểm tra lại");
+                _ = MessageBox.Show(" hãy kiểm tra lại");
             }
-           
+
         }
     }
 }
