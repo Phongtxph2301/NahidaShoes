@@ -11,5 +11,6 @@ namespace B_BUS.IServices
         List<ChiTietGiay> GetAll();
         bool CheckMa(Guid idSize, Guid idNsx, Guid idMauSac, Guid idHangGiay, Guid idGiay, Guid idChieuCaoDeGiay);
         List<ChiTietGiayView> GetAllView();
+        List<ChiTietGiayView> GetAllViewSale();
     }
 }
