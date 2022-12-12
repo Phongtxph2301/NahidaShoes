@@ -76,7 +76,7 @@ namespace C_GUI.Views
 
         private void rjTextBox1__TextChanged(object sender, EventArgs e)
         {
-            LoadData(_ChiTietGiay.GetAllView().Where(c => c.Giay.TenGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower()) ||c.Size.TenSize.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.Nsx.TenNsx.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.MauSac.TenMauSac.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.HangGiay.TenHangGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower())).ToList());
+            LoadData(_ChiTietGiay.GetAllView().Where(c => c.Giay.TenGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower()) ||c.Size.TenSize.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.Nsx.TenNsx.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.MauSac.TenMauSac.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.HangGiay.TenHangGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.ChieuCaoDeGiay.KichCo ==int.Parse(tbx_timkiem.Texts.ToLower())).ToList());
         }
 
         public bool check()

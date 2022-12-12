@@ -127,7 +127,7 @@
             this.btn_themtheloai.FlatAppearance.BorderSize = 0;
             this.btn_themtheloai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_themtheloai.ForeColor = System.Drawing.Color.Black;
-            this.btn_themtheloai.Location = new System.Drawing.Point(441, 275);
+            this.btn_themtheloai.Location = new System.Drawing.Point(441, 285);
             this.btn_themtheloai.Name = "btn_themtheloai";
             this.btn_themtheloai.Size = new System.Drawing.Size(162, 39);
             this.btn_themtheloai.SizeImage = new System.Drawing.Size(20, 20);
