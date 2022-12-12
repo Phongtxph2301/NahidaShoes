@@ -1,17 +1,8 @@
-﻿using B_BUS.View_Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using A_DAL.Entities;
 using B_BUS.IServices;
 using B_BUS.Services;
-using A_DAL.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using B_BUS.View_Models;
+using System.Data;
 
 namespace C_GUI.QLForm
 {
@@ -24,7 +15,7 @@ namespace C_GUI.QLForm
         public IQLHangGiay _IQlHangGiay;
         public IQLMauSac _IQlMauSac;
         public IQLNsx _IQlNsx;
-        Guid _ID;
+        private Guid _ID;
         public FormSale()
         {
             InitializeComponent();
@@ -103,14 +94,14 @@ namespace C_GUI.QLForm
             dgrid_show.Columns[8].Name = "trạng thái";
             dgrid_show.Rows.Clear();
             dgrid_show.Columns[1].Visible = false;
-            foreach (var a in saleViews)
+            foreach (SaleView a in saleViews)
             {
                 _ = dgrid_show.Rows.Add(stt++, a.Sale.Id, a.Sale.MaGiamGia, a.Sale.TenChuongTrinh, a.Sale.PhanTramGiamGia, a.Sale.SoTiemGiamGia, a.Sale.NgayBatDau, a.Sale.NgayKetThuc, (a.Sale.NgayBatDau <= DateTime.Now && a.Sale.NgayKetThuc >= DateTime.Now) ? "hoat dong" : "khong hoat dong");
             }
         }
 
 
-        
+
 
         public void LoadDataSP()
         {
@@ -130,12 +121,12 @@ namespace C_GUI.QLForm
             dgrid_showsanpham.Columns[11].Name = "id";
 
             dgrid_showsanpham.Rows.Clear();
-            foreach (var a in _IQlChiTietGiay.GetAllViewSale())
+            foreach (ChiTietGiayView a in _IQlChiTietGiay.GetAllViewSale())
             {
-                var b = _IQlChiTietSale.GetAllView().Find(c => c.ChiTietSale.IdChiTietGiay == a.ChiTietGiay.Id);
-                var c = _IQlSale.GetAllView().Find(c => c.Sale.Id == b.ChiTietSale.IdSale);
+                ChiTietSaleView? b = _IQlChiTietSale.GetAllView().Find(c => c.ChiTietSale.IdChiTietGiay == a.ChiTietGiay.Id);
+                SaleView? c = _IQlSale.GetAllView().Find(c => c.Sale.Id == b.ChiTietSale.IdSale);
                 //var c = _IQlChiTietSale.GetAllView().Find(c => c.ChiTietSale.IdSale == b.Sale.Id);
-                _ = dgrid_showsanpham.Rows.Add(stt++,c.Sale.TenChuongTrinh ,a.ChiTietGiay.GiaBan, (a.ChiTietGiay.GiaBan - (a.ChiTietGiay.GiaBan * ((c.Sale.PhanTramGiamGia) / 100)) - c.Sale.SoTiemGiamGia), a.MauSac.TenMauSac, a.Giay.TenGiay, a.ChiTietGiay.GiaNhap, a.ChiTietGiay.SoLuongTon, a.HangGiay.TenHangGiay, a.Nsx.TenNsx,(c.Sale.NgayBatDau <= DateTime.Now && c.Sale.NgayKetThuc >= DateTime.Now) ? "hoat dong" : "khong hoat dong",b.ChiTietSale.Id);
+                _ = dgrid_showsanpham.Rows.Add(stt++, c.Sale.TenChuongTrinh, a.ChiTietGiay.GiaBan, a.ChiTietGiay.GiaBan - (a.ChiTietGiay.GiaBan * (c.Sale.PhanTramGiamGia / 100)) - c.Sale.SoTiemGiamGia, a.MauSac.TenMauSac, a.Giay.TenGiay, a.ChiTietGiay.GiaNhap, a.ChiTietGiay.SoLuongTon, a.HangGiay.TenHangGiay, a.Nsx.TenNsx, (c.Sale.NgayBatDau <= DateTime.Now && c.Sale.NgayKetThuc >= DateTime.Now) ? "hoat dong" : "khong hoat dong", b.ChiTietSale.Id);
             }
         }
         public void LoadDataSP2(List<ChiTietGiayView> chiTietGiayViews)
@@ -153,10 +144,10 @@ namespace C_GUI.QLForm
             dgrid_SP.Columns[8].Name = "id";
             dgrid_SP.Columns[8].Visible = true;
             dgrid_SP.Rows.Clear();
-            foreach (var a in chiTietGiayViews)
+            foreach (ChiTietGiayView a in chiTietGiayViews)
             {
                 //var c = _IQlChiTietSale.GetAllView().Find(c => c.ChiTietSale.IdSale == b.Sale.Id);
-                _ = dgrid_SP.Rows.Add(stt++, a.ChiTietGiay.GiaBan, a.MauSac.TenMauSac, a.Giay.TenGiay, a.ChiTietGiay.GiaNhap, a.ChiTietGiay.SoLuongTon, a.HangGiay.TenHangGiay, a.Nsx.TenNsx,a.ChiTietGiay.Id);
+                _ = dgrid_SP.Rows.Add(stt++, a.ChiTietGiay.GiaBan, a.MauSac.TenMauSac, a.Giay.TenGiay, a.ChiTietGiay.GiaNhap, a.ChiTietGiay.SoLuongTon, a.HangGiay.TenHangGiay, a.Nsx.TenNsx, a.ChiTietGiay.Id);
             }
         }
         public Sale GetvaluaContro()
@@ -173,7 +164,7 @@ namespace C_GUI.QLForm
             };
         }
 
-        
+
 
         private void btn_them_Click(object sender, EventArgs e)
         {
@@ -311,14 +302,14 @@ namespace C_GUI.QLForm
 
         private void txt_timkiem__TextChanged(object sender, EventArgs e)
         {
-            LoadData(_IQlSale.GetAllView().Where(c => (c.Sale.TenChuongTrinh.ToLower().Contains(txt_timkiem.Texts.ToLower()) || c.Sale.MaGiamGia.ToLower().Contains(txt_timkiem.Texts.ToLower()))).ToList());
+            LoadData(_IQlSale.GetAllView().Where(c => c.Sale.TenChuongTrinh.ToLower().Contains(txt_timkiem.Texts.ToLower()) || c.Sale.MaGiamGia.ToLower().Contains(txt_timkiem.Texts.ToLower())).ToList());
         }
         public List<ChiTietSale> GetvaluaControSALE()
         {
           
             List<ChiTietSale> chiTietSales;
-            chiTietSales=new List<ChiTietSale>();
-            var x = _IQlSale.GetAllView().FirstOrDefault(c => c.Sale.TenChuongTrinh == cmb_sale.Texts);
+            chiTietSales = new List<ChiTietSale>();
+            SaleView? x = _IQlSale.GetAllView().FirstOrDefault(c => c.Sale.TenChuongTrinh == cmb_sale.Texts);
 
             //foreach (DataGridViewRow a in dgrid_SP.Rows)
             //{
@@ -329,10 +320,10 @@ namespace C_GUI.QLForm
             //    });
 
             //}
-         
-            for (int i = 0; i < (dgrid_SP.Rows.Count); i++)
+
+            for (int i = 0; i < dgrid_SP.Rows.Count; i++)
             {
-                Guid IDChitietGiay = new Guid(dgrid_SP.Rows[i].Cells[8].Value.ToString());
+                Guid IDChitietGiay = new(dgrid_SP.Rows[i].Cells[8].Value.ToString());
                 chiTietSales.Add(new ChiTietSale()
                 {
                     IdSale = x.Sale.Id,
@@ -849,7 +840,7 @@ namespace C_GUI.QLForm
            
         }
 
-       
+
 
        
 
@@ -959,7 +950,7 @@ namespace C_GUI.QLForm
            
         }
 
-        
+
         private void LocChiTietGiay()
         {
             try

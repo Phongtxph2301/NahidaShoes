@@ -85,26 +85,26 @@ namespace B_BUS.Services
         {
             // getall
             List<ChiTietGiayView> lst = (from a in igchiTietGiay.GetAll()
-                join b in igmausac.GetAll() on a.IdMauSac equals b.Id
-                join c in igNsx.GetAll() on a.IdNsx equals c.Id
-                join d in igSize.GetAll() on a.IdSize equals d.Id
-                join e in igHangGiay.GetAll() on a.IdHangGiay equals e.Id
-                join f in igchieucaodegiay.GetAll() on a.IdChieuCaoDeGiay equals f.Id
-                join g in igGiay.GetAll() on a.IdGiay equals g.Id
-                join i in igChiTietSale.GetAll() on a.Id equals i.IdChiTietGiay
-                join h in igSale.GetAll() on i.IdSale equals h.Id
-                select new ChiTietGiayView()
-                {
-                    ChiTietGiay = a,
-                    MauSac = b,
-                    Nsx = c,
-                    Size = d,
-                    HangGiay = e,
-                    ChieuCaoDeGiay = f,
-                    Giay = g,
-                    ChiTietSale = i,
-                    Sale = h,
-                }).ToList();
+                                         join b in igmausac.GetAll() on a.IdMauSac equals b.Id
+                                         join c in igNsx.GetAll() on a.IdNsx equals c.Id
+                                         join d in igSize.GetAll() on a.IdSize equals d.Id
+                                         join e in igHangGiay.GetAll() on a.IdHangGiay equals e.Id
+                                         join f in igchieucaodegiay.GetAll() on a.IdChieuCaoDeGiay equals f.Id
+                                         join g in igGiay.GetAll() on a.IdGiay equals g.Id
+                                         join i in igChiTietSale.GetAll() on a.Id equals i.IdChiTietGiay
+                                         join h in igSale.GetAll() on i.IdSale equals h.Id
+                                         select new ChiTietGiayView()
+                                         {
+                                             ChiTietGiay = a,
+                                             MauSac = b,
+                                             Nsx = c,
+                                             Size = d,
+                                             HangGiay = e,
+                                             ChieuCaoDeGiay = f,
+                                             Giay = g,
+                                             ChiTietSale = i,
+                                             Sale = h,
+                                         }).ToList();
             return lst;
         }
     }

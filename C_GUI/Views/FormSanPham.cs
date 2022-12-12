@@ -1,6 +1,7 @@
 ﻿using A_DAL.Entities;
 using B_BUS.IServices;
 using B_BUS.Services;
+using B_BUS.View_Models;
 using C_GUI.QLForm;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -61,7 +62,7 @@ namespace C_GUI.Views
             Giay = new FormGiay();
             _Ichotiett = new QLChiTietTheLoai();
             btn_save.Visible = false;
-            LoadData();
+            LoadData(_ChiTietGiay.GetAllView());
             LoadComBo();
             btn_export.Visible = false;
             //cmb_mausac.SelectedItem="Màu Sắc 1";
@@ -75,7 +76,7 @@ namespace C_GUI.Views
 
         private void rjTextBox1__TextChanged(object sender, EventArgs e)
         {
-
+            LoadData(_ChiTietGiay.GetAllView().Where(c => c.Giay.TenGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower()) || c.Size.TenSize.ToLower().Contains(tbx_timkiem.Texts.ToLower()) || c.Nsx.TenNsx.ToLower().Contains(tbx_timkiem.Texts.ToLower()) || c.MauSac.TenMauSac.ToLower().Contains(tbx_timkiem.Texts.ToLower()) || c.HangGiay.TenHangGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower())).ToList());
         }
 
         public bool check()
@@ -198,6 +199,8 @@ namespace C_GUI.Views
                 _ = MessageBox.Show("Vui Lòng không nhập tiền Âm hoặc bằng ko");
                 return false;
             }
+
+
             return true;
         }
         public void LoadComBo()
@@ -240,7 +243,7 @@ namespace C_GUI.Views
 
         }
 
-        public void LoadData()
+        public void LoadData(List<ChiTietGiayView> chiTietGiayViews)
         {
             _dgrvThongTinSanPham.ColumnCount = 11;
             _dgrvThongTinSanPham.Columns[0].Name = "ID";
@@ -258,7 +261,7 @@ namespace C_GUI.Views
 
             _dgrvThongTinSanPham.Rows.Clear();
 
-            foreach (B_BUS.View_Models.ChiTietGiayView VARIABLE in _ChiTietGiay.GetAllView())
+            foreach (B_BUS.View_Models.ChiTietGiayView VARIABLE in chiTietGiayViews)
             {
                 _ = _dgrvThongTinSanPham.Rows.Add(VARIABLE.ChiTietGiay.Id, VARIABLE.MauSac.TenMauSac, VARIABLE.Nsx.TenNsx, VARIABLE.Size.TenSize, VARIABLE.HangGiay.TenHangGiay, VARIABLE.ChieuCaoDeGiay.KichCo, VARIABLE.Giay.TenGiay, VARIABLE.ChiTietGiay.MoTa, VARIABLE.ChiTietGiay.GiaBan, VARIABLE.ChiTietGiay.GiaNhap, VARIABLE.ChiTietGiay.SoLuongTon);
             }
@@ -323,7 +326,7 @@ namespace C_GUI.Views
                 if (_ChiTietGiay.Delete(xoa))
                 {
                     _ = MessageBox.Show("Xóa Thành Công");
-                    LoadData();
+                    LoadData(_ChiTietGiay.GetAllView());
                 }
             }
         }
@@ -365,6 +368,11 @@ namespace C_GUI.Views
             A_DAL.Entities.Size? size = _Size.GetAll().FirstOrDefault(c => c.TenSize == _rjcmbSize.Texts);
             Giay? giay = _Giay.GetAll().FirstOrDefault(c => c.TenGiay == _rjcmbTenGiay.Texts);
             ChieuCaoDeGiay? ccDeGiay = _ChieuCaoDeGiay.GetAll().FirstOrDefault(c => c.KichCo == int.Parse(_rjcmbCCDeGiay.Texts));
+            if (_ChiTietGiay.CheckMa(size.Id, nsx.Id, mausac.Id, hanggiay.Id, giay.Id, ccDeGiay.Id) == false)
+            {
+                _ = MessageBox.Show("Mã Trùng");
+                return;
+            }
             bool thongbao = _ChiTietGiay.Add(new ChiTietGiay()
             {
                 Id = Guid.NewGuid(),
@@ -387,7 +395,7 @@ namespace C_GUI.Views
                 if (thongbao)
                 {
                     _ = MessageBox.Show("Thêm Thành Công");
-                    LoadData();
+                    LoadData(_ChiTietGiay.GetAllView());
                 }
                 else
                 {
@@ -480,7 +488,7 @@ namespace C_GUI.Views
                 if (thongbao)
                 {
                     _ = MessageBox.Show("Sửa Thành Công");
-                    LoadData();
+                    LoadData(_ChiTietGiay.GetAllView());
                 }
                 else
                 {
@@ -833,12 +841,24 @@ namespace C_GUI.Views
         {
             TheLoai? idtheloais = _theloai.GetAll().FirstOrDefault(c => c.MaTheLoai == cmb_theloai.Texts);
             Guid Idchitietgiay = Idwhenclick;
-            Guid idtheloai = idtheloais.Id;
-            _ = _Ichotiett.Add(new ChiTietTheLoai()
+            if (idtheloais == null)
             {
-                IdChiTietGiay = Idwhenclick,
-                IdTheLoai = idtheloai,
-            });
+                return;
+            }
+            Guid idtheloai = idtheloais.Id;
+            try
+            {
+                _ = _Ichotiett.Add(new ChiTietTheLoai()
+                {
+                    IdChiTietGiay = Idwhenclick,
+                    IdTheLoai = idtheloai,
+                });
+                _ = MessageBox.Show("Đã thêm");
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         private void btn_export_Click(object sender, EventArgs e)
@@ -929,5 +949,7 @@ namespace C_GUI.Views
             byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
             return xByte;
         }
+
+
     }
 }
