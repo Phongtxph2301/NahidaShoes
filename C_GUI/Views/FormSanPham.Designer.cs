@@ -668,7 +668,7 @@
             this.tbx_timkiem.TabIndex = 1;
             this.tbx_timkiem.Texts = "";
             this.tbx_timkiem.UnderlinedStyle = false;
-            this.tbx_timkiem._TextChanged += new System.EventHandler(this.btn_export_Click);
+            this.tbx_timkiem._TextChanged += new System.EventHandler(this.rjTextBox1__TextChanged);
             // 
             // _dgrvThongTinSanPham
             // 

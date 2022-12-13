@@ -37,6 +37,11 @@ namespace B_BUS.Services
             return igChiTietTheLoai.Delete(obj);
         }
 
+        public bool checkma(Guid obj)
+        {
+            return igChiTietTheLoai.GetAll().Any(c => c.Id == obj);
+        }
+
         public List<ChiTietTheLoaiView> GetAllView()
         {
             // getall
