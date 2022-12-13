@@ -426,6 +426,7 @@
             // 
             // _pnlDesktoppanel
             // 
+            this._pnlDesktoppanel.BackColor = System.Drawing.Color.Aqua;
             this._pnlDesktoppanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._pnlDesktoppanel.Location = new System.Drawing.Point(219, 94);
             this._pnlDesktoppanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
