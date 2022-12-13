@@ -264,6 +264,7 @@ namespace C_GUI.Views
                             MessageBox.Show("Tên nhân Viên không được chứa số", "ERR");
                             return ;
                         }
+                        
                         Guid IdNsx = _Nsx.IdNsx(n);
                         //  MessageBox.Show(IdNsx.ToString());
 

@@ -65,6 +65,8 @@ namespace C_GUI.Views
             LoadData(_ChiTietGiay.GetAllView());
             LoadComBo();
             btn_export.Visible = false;
+            dTheLoai();
+            
             //cmb_mausac.SelectedItem="Màu Sắc 1";
             //_rjcmbNSX.SelectedItem=1;
             //_rjcmbSize.SelectedItem = 1;
@@ -74,6 +76,20 @@ namespace C_GUI.Views
             //cmb_theloai.SelectedItem = 1;
         }
 
+        private void dTheLoai()
+        {
+           // var ten = _Giay.GetAll().FirstOrDefault(c => c.TenGiay == _rjcmbTenGiay.Texts);
+            dgrvtheloai.ColumnCount = 2;
+            dgrvtheloai.Columns[0].Name = "Tên";
+            dgrvtheloai.Columns[1].Name = "Thê Loại";
+            dgrvtheloai.Rows.Clear();
+            dgrvtheloai.Columns[0].Visible = false;
+            dgrvtheloai.AllowUserToAddRows=false;
+            foreach (var c in _ChiTietTheLoai.GetAllView().Where(c=>c.ChiTietGiay.Id ==Idwhenclick))
+            {
+                dgrvtheloai.Rows.Add(c.ChiTietGiay.IdGiay,c.TheLoai.TenTheLoai);
+            }
+        }
         private void rjTextBox1__TextChanged(object sender, EventArgs e)
         {
             LoadData(_ChiTietGiay.GetAllView().Where(c => c.Giay.TenGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower()) ||c.Size.TenSize.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.Nsx.TenNsx.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.MauSac.TenMauSac.ToLower().Contains(tbx_timkiem.Texts.ToLower())|| c.HangGiay.TenHangGiay.ToLower().Contains(tbx_timkiem.Texts.ToLower())).ToList());
@@ -270,7 +286,7 @@ namespace C_GUI.Views
             _dgrvThongTinSanPham.Columns[10].Name = "Số Lương Tồn";
 
             _dgrvThongTinSanPham.Rows.Clear();
-
+            _dgrvThongTinSanPham.AllowUserToAddRows = false;
             foreach (B_BUS.View_Models.ChiTietGiayView VARIABLE in chiTietGiayViews)
             {
                 _ = _dgrvThongTinSanPham.Rows.Add(VARIABLE.ChiTietGiay.Id, VARIABLE.MauSac.TenMauSac, VARIABLE.Nsx.TenNsx, VARIABLE.Size.TenSize, VARIABLE.HangGiay.TenHangGiay, VARIABLE.ChieuCaoDeGiay.KichCo, VARIABLE.Giay.TenGiay, VARIABLE.ChiTietGiay.MoTa, VARIABLE.ChiTietGiay.GiaBan, VARIABLE.ChiTietGiay.GiaNhap, VARIABLE.ChiTietGiay.SoLuongTon);
@@ -448,6 +464,8 @@ namespace C_GUI.Views
             {
                 pictureBox1.Image = Image.FromStream(new MemoryStream(chitietgiay.Anh));
             }
+
+            dTheLoai();
         }
 
         private Image cellanh(byte[] obj)
@@ -947,7 +965,7 @@ namespace C_GUI.Views
             }
             catch (Exception es)
             {
-                MessageBox.Show(es.ToString());
+                MessageBox.Show("Không đc trùng");
             }
 
 
